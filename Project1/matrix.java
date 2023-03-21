@@ -1,6 +1,7 @@
 package Project1;
 import java.util.Scanner;
 import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.io.FileNotFoundException;
 import java.io.File;
 
@@ -22,6 +23,78 @@ public class matrix {
      *  - ask user to input both matrices from one or 2 text files
      *      first line = size; then elements
      */
+
+     public int menu() throws FileNotFoundException, InputMismatchException{
+        Scanner userInput = new Scanner(System.in);
+        int choice = 0;
+
+
+        //userInput.nextLine();
+        
+
+        // do{
+        //     printMenuOptions();
+        //     try {
+        //         if(!userInput.hasNextInt()) {
+        //             System.out.println("Invalid input. Please enter a number.");
+        //             //userInput.nextLine();
+        //         }
+        //         choice = userInput.nextInt();  
+                
+                
+
+        //         // buffer is empty??
+        //         // still nothing in buffer after invalid input -> exceptions
+
+
+        //     } catch (InputMismatchException e){
+        //         System.out.println("Please only select option 1 - 5.");
+        //         //userInput.nextLine(); // Clear buffer
+        //     } catch (NoSuchElementException e2){
+        //         System.out.println("Error: nothing in buffer.");
+        //         break;
+        //     }
+        // } while((choice != 1) && (choice != 2) && (choice != 3)
+        //         && (choice != 4) && (choice != 5));
+        
+            //
+        printMenuOptions();
+        while (!userInput.hasNextInt()) {
+            System.out.println("Invalid input. Please enter a number.");
+            userInput.nextLine();
+        }
+    
+        choice = userInput.nextInt();
+        userInput.nextLine(); // clear buffer of newline char
+
+        System.out.println("Choice 1: "+choice);
+
+        if(choice == 1){
+            initializeArrays();
+        } else if(choice == 2){
+            addition();
+        } else if(choice == 3){
+            subtraction();
+        } else if(choice == 4){
+            multiplication();
+        } else{
+            System.out.println("Exiting program.");
+        }
+
+        System.out.println("Choice: "+choice);
+        userInput.close();
+        return choice; // If user inputs 5, exit.
+        
+    }
+
+    private void printMenuOptions(){
+        System.out.println("");
+        System.out.println("1: Upload 2 new matrices.");
+        System.out.println("2: Matrix addition.");
+        System.out.println("3: Matrix subtraction.");
+        System.out.println("4: Matrix multiplication.");
+        System.out.println("5: Exit program.");
+    }
 
 
 
@@ -126,7 +199,7 @@ public class matrix {
             matrixA = new float [rowA][colA];
             fileScanner.nextLine();
 
-            System.out.println("MatA size: "+rowA+" "+colA);
+            //System.out.println("MatA size: "+rowA+" "+colA);
 
             int rowCounter = 0;
             int colCounter = 0;
@@ -162,37 +235,50 @@ public class matrix {
             matrixB = new float [rowB][colB];
             fileScanner.nextLine();
 
-            System.out.println("MatB size: "+rowB+" "+colB);
+            //System.out.println("MatB size: "+rowB+" "+colB);
 
             // Scan for matrix B
             while(rowCounter < rowB){
-                //System.out.println("Row counter: "+rowCounter);
                 lineScanner = new Scanner(fileScanner.nextLine());
                 while(lineScanner.hasNextFloat()){
-                    //System.out.println("Col counter: "+colCounter);
                     temp = lineScanner.nextFloat();
-                    //System.out.println("Temp: "+ temp);
                     matrixB[rowCounter][colCounter] = temp;
                     colCounter++;
                     if(colCounter >= colB){
                         colCounter = 0;
-                        //System.out.println("break?");
                         break;
                     }
                 }
                 lineScanner.close();
                 rowCounter++;
-                //System.out.println("Row counter again: "+rowCounter);
             }
             fileScanner.close();
         }
 
         printMatrices();
+
+
+        //??
+        //userInput.nextLine();
+
+
         userInput.close();
     }
 
+    private void addition(){
+
+    }
+
+    private void subtraction(){
+
+    }
+
+    private void multiplication(){
+
+    }
+    
+
     private void printMatrices(){
-        // Print augmented matrix
         System.out.println("Matrix 1");
         for(int i=0; i<matrixA.length; i++){
             for(int j=0; j<matrixA[i].length; j++){
