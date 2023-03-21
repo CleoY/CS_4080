@@ -2,6 +2,7 @@ package Project1;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 import java.io.FileNotFoundException;
+import java.io.File;
 
 public class matrix {
     private float[][] matrixA;
@@ -102,21 +103,58 @@ public class matrix {
                     matrixA[r][c] = temp;
                 }
             }
-
-
-
-        // } else if(inputMethod == 2){
-        //     System.out.println("Please enter the name of the file you would like to upload:");
-        //     fileName = userInput.nextLine(); //get file name from user input
-        //     File file = new File(fileName);
-
-        //     // Check file existance
-        //     while(!file.exists()){
-        //         System.out.println("Error: File not found. Please enter another file name.");
-        //         fileName = userInput.nextLine(); //get file name from user input
-        //         file = new File(fileName);
-        //     }
+        } else if(inputMethod == 2){
+            File file;
+        
+            System.out.println("Please enter the name of the file you would like to upload:");    
+            do{
+                fileName = userInput.nextLine(); //get file name from user input
+                file = new File(fileName);
+                if (!file.exists()){
+                    System.out.println("Error: File not found. Please enter another file name.");
+                }
+            } while(!file.exists());
             
+            System.out.println(file);
+            
+            Scanner fileScanner = new Scanner(file); 
+            Scanner lineScanner;
+            rowA = fileScanner.nextInt();
+            colA = fileScanner.nextInt();
+            matrixA = new float [rowA][colA];
+            fileScanner.nextLine();
+
+            System.out.println("MatA size: "+rowA+" "+colA);
+            System.out.println("MatB size: "+rowB+" "+colB);
+
+            int rowCounter = 0;
+            int colCounter = 0;
+
+            while(rowCounter < rowA){
+                lineScanner = new Scanner(fileScanner.nextLine());
+                while(lineScanner.hasNextFloat()){
+                    temp = lineScanner.nextFloat();
+                    if(colCounter >= colA){
+                        colCounter = 0;
+                        break;
+                    }
+                    matrixA[rowCounter][colCounter] = temp;
+                    colCounter++;
+                }
+                lineScanner.close();
+                rowCounter++;
+            }
+
+            // while(fileScanner.hasNextLine()){
+            //     lineScanner = new Scanner(fileScanner.nextLine());
+            //     rowA = lineScanner.nextInt();
+            //     colA = lineScanner.nextInt();
+                
+                
+            //     lineScanner.close();
+            // }
+            
+            fileScanner.close();
         //     Scanner fileScanner = new Scanner(file);    
         //     while(fileScanner.hasNextLine()){
         //         Scanner lineScanner = new Scanner(fileScanner.nextLine());
@@ -137,12 +175,11 @@ public class matrix {
         //     //System.out.println("Done processing text file.");
 
         //     fileScanner.close();
-        // }
+        }// }
 
         printMatrices();
         userInput.close();
         }
-    }
 
     private void printMatrices(){
         // Print augmented matrix
