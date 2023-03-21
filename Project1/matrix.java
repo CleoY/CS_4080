@@ -50,10 +50,10 @@ public class matrix {
 
         if(choice == 1){
             initializeMatrices(userInput);
-        } else if(choice == 2){
-            addition();
-        } else if(choice == 3){
-            subtraction();
+        } else if(choice == 2){ // Addition
+            additionOrSubtraction(1);
+        } else if(choice == 3){ // Subtraction
+            additionOrSubtraction(2);
         } else if(choice == 4){
             multiplication();
         } else{
@@ -230,32 +230,75 @@ public class matrix {
         printMatrices();
     }
 
-    private void addition(){
 
+
+    private float[][] additionOrSubtraction(int option){
+        if(sizeValidation(1)){
+            ///
+
+
+
+
+        }
+        float[][] intermediate = new float[matrixA.length][matrixA[0].length];
+        int rows = matrixA.length; // could use matrixB. After size validation, they should be equal
+        int cols = matrixA[0].length;
+        
+        for(int i=0; i<rows; i++){
+            for(int j=0; j<cols; j++){
+                if(option == 1){ // addition
+                    intermediate[i][j] = matrixA[i][j] + matrixB[i][j];
+                } else{ // subtraction
+                    intermediate[i][j] = matrixA[i][j] - matrixB[i][j];
+                }
+            }
+        }
+        return intermediate;
     }
 
-    private void subtraction(){
 
-    }
+    // public int[][] addOrSubMatrices(int[][] matrixA, int[][] matrixB, int option){
+    //     int[][] intermediate = new int [matrixA.length][matrixA.length];
+    //     int size = matrixA.length;
+        
+    //     for(int i=0; i<size; i++){
+    //         for(int j=0; j<size; j++){
+    //             if(option == 1){
+    //                 intermediate[i][j] = matrixA[i][j] + matrixB[i][j];
+    //             } else{
+    //                 intermediate[i][j] = matrixA[i][j] - matrixB[i][j];
+    //             }
+    //         }
+    //     }
+    //     return intermediate;
+    // }
+
 
     private void multiplication(){
 
     }
     
 
-    private void printMatrices(){
-        System.out.println("Matrix 1");
-        for(int i=0; i<matrixA.length; i++){
-            for(int j=0; j<matrixA[i].length; j++){
-                System.out.print(matrixA[i][j]+" ");
-            }
-            System.out.println("");
-        }
 
-        System.out.println("Matrix 2");
-        for(int i=0; i<matrixB.length; i++){
-            for(int j=0; j<matrixB[i].length; j++){
-                System.out.print(matrixB[i][j]+" ");
+    private boolean sizeValidation(int option){
+        // opt 1: add or sub
+        // 2: multi
+        // add and sub requires that the matrices be exactly the same size
+        // multi only requires first matrix cols = 2nd mat rows
+        return false;
+    }
+
+    // delete later
+    private void printMatrices(){
+        printMatrix(matrixA, "Matrix 1");
+        printMatrix(matrixB, "Matrix 2");
+    }
+
+    private void printMatrix(float[][] given, String msg){
+        System.out.println(msg);
+        for(int i=0; i<given.length; i++){
+            for(int j=0; j<given[i].length; j++){
+                System.out.print(given[i][j]+" ");
             }
             System.out.println("");
         }
