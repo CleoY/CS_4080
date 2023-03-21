@@ -27,11 +27,7 @@ public class matrix {
      public int menu(Scanner userInput) throws FileNotFoundException, InputMismatchException{
         userInput = new Scanner(System.in);
         int choice = 0;
-
-
-        //userInput.nextLine();
         
-
         do{
             printMenuOptions();
             try {
@@ -50,20 +46,7 @@ public class matrix {
         } while((choice != 1) && (choice != 2) && (choice != 3)
                 && (choice != 4) && (choice != 5));
         
-
-            //
-        // printMenuOptions();
-        // while (!userInput.hasNextInt()) {
-        //     System.out.println("Invalid input. Please enter a number.");
-        //     userInput.nextLine();
-        // }
-    
-        // choice = userInput.nextInt();
-        // userInput.nextLine(); // clear buffer of newline char
-
-
-
-        System.out.println("Choice 1: "+choice);
+        //System.out.println("Choice 1: "+choice);
 
         if(choice == 1){
             initializeMatrices(userInput);
@@ -78,7 +61,6 @@ public class matrix {
         }
 
         System.out.println("Choice: "+choice);
-        //userInput.close();
         return choice; // If user inputs 5, exit.
         
     }
