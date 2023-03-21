@@ -247,20 +247,17 @@ public class matrix {
     }
 
 
-    
+    //// MAY NOT NEED TO RETURN MATRIX
     /**
      * Returns matrix after addition or subtraction between matrix A and B. 
      * Option flag allows me to reuse code since addition and subtraction operations are similar.
      * @param option    A flag for addition or subtraction
-     * @return          The resulting matrix after adding/subtracting matrixA and matrixB
+     * @return          The resulting matrix after adding/subtracting matrixA and matrixB.
+     *                  Return null if size validation fails.
      */
     private float[][] additionOrSubtraction(int option){
-        if(sizeValidation(1)){
-            ///
-
-
-
-
+        if(!sizeValidation(1)){
+            return null;
         }
         float[][] intermediate = new float[matrixA.length][matrixA[0].length];
         int rows = matrixA.length; // could use matrixB. After size validation, they should be equal
@@ -275,6 +272,7 @@ public class matrix {
                 }
             }
         }
+        printMatrix(intermediate, "Resulting matrix: ");
         return intermediate;
     }
 
@@ -311,10 +309,21 @@ public class matrix {
         // 2: multi
         // add and sub requires that the matrices be exactly the same size
         // multi only requires first matrix cols = 2nd mat rows
-        if(option == 1){
-
+        if(option == 1){ // addition or subtraction
+            if((matrixA.length != matrixB.length) || (matrixA[0].length != matrixB[0].length)){
+                System.out.println("Error: matrix A and matrix B must be the same size.");
+                System.out.println("Please select another operation or choose 2 new matrices.");
+                return false;
+            }
+        } else{ // multiplication
+            if(matrixA[0].length != matrixB.length){
+                System.out.println("Error: Cannot multiply matrix A by matrix B.");
+                System.out.println("The number of columns in matrix A must equal the number of columns in matrix B.");
+                System.out.println("Please select another operation or choose 2 new matrices.");
+                return false;
+            }
         }
-        return false;
+        return true;
     }
 
     // delete later
