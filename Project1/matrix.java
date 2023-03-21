@@ -8,7 +8,7 @@ import java.io.File;
 public class matrix {
     private float[][] matrixA;
     private float[][] matrixB;
-    
+    //private Scanner userInput;
     /*
      * +, -, x
      * ask user to enter 2 matrices
@@ -24,8 +24,8 @@ public class matrix {
      *      first line = size; then elements
      */
 
-     public int menu() throws FileNotFoundException, InputMismatchException{
-        Scanner userInput = new Scanner(System.in);
+     public int menu(Scanner userInput) throws FileNotFoundException, InputMismatchException{
+        userInput = new Scanner(System.in);
         int choice = 0;
 
 
@@ -70,7 +70,7 @@ public class matrix {
         System.out.println("Choice 1: "+choice);
 
         if(choice == 1){
-            initializeArrays();
+            initializeArrays(userInput);
         } else if(choice == 2){
             addition();
         } else if(choice == 3){
@@ -82,7 +82,7 @@ public class matrix {
         }
 
         System.out.println("Choice: "+choice);
-        userInput.close();
+        //userInput.close();
         return choice; // If user inputs 5, exit.
         
     }
@@ -98,11 +98,10 @@ public class matrix {
 
 
 
-    public void initializeArrays() throws NumberFormatException, InputMismatchException, FileNotFoundException{
-        Scanner userInput = new Scanner(System.in);
+    public void initializeArrays(Scanner userInput) throws NumberFormatException, InputMismatchException, FileNotFoundException{
+        //Scanner userInput = new Scanner(System.in);
         int inputMethod = 0;
         String fileName = "";
-        //String input = "";
         boolean validNum = false;
 
         // Get user's matrix input method
@@ -262,7 +261,7 @@ public class matrix {
         //userInput.nextLine();
 
 
-        userInput.close();
+        //userInput.close();
     }
 
     private void addition(){
