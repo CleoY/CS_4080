@@ -32,45 +32,41 @@ public class matrix {
         //userInput.nextLine();
         
 
-        // do{
-        //     printMenuOptions();
-        //     try {
-        //         if(!userInput.hasNextInt()) {
-        //             System.out.println("Invalid input. Please enter a number.");
-        //             //userInput.nextLine();
-        //         }
-        //         choice = userInput.nextInt();  
-                
-                
-
-        //         // buffer is empty??
-        //         // still nothing in buffer after invalid input -> exceptions
-
-
-        //     } catch (InputMismatchException e){
-        //         System.out.println("Please only select option 1 - 5.");
-        //         //userInput.nextLine(); // Clear buffer
-        //     } catch (NoSuchElementException e2){
-        //         System.out.println("Error: nothing in buffer.");
-        //         break;
-        //     }
-        // } while((choice != 1) && (choice != 2) && (choice != 3)
-        //         && (choice != 4) && (choice != 5));
+        do{
+            printMenuOptions();
+            try {
+                // if((choice != 1) && (choice != 2) && (choice != 3)
+                //         && (choice != 4) && (choice != 5)){
+                //     System.out.println("Please only select option 1 - 5.");
+                // }
+                choice = userInput.nextInt();  
+            } catch (InputMismatchException e){
+                System.out.println("Please only select option 1 - 5.");
+                userInput.nextLine(); // Clear buffer
+            } catch (NoSuchElementException e2){
+                System.out.println("Error: nothing in buffer.");
+                break;
+            }
+        } while((choice != 1) && (choice != 2) && (choice != 3)
+                && (choice != 4) && (choice != 5));
         
+
             //
-        printMenuOptions();
-        while (!userInput.hasNextInt()) {
-            System.out.println("Invalid input. Please enter a number.");
-            userInput.nextLine();
-        }
+        // printMenuOptions();
+        // while (!userInput.hasNextInt()) {
+        //     System.out.println("Invalid input. Please enter a number.");
+        //     userInput.nextLine();
+        // }
     
-        choice = userInput.nextInt();
-        userInput.nextLine(); // clear buffer of newline char
+        // choice = userInput.nextInt();
+        // userInput.nextLine(); // clear buffer of newline char
+
+
 
         System.out.println("Choice 1: "+choice);
 
         if(choice == 1){
-            initializeArrays(userInput);
+            initializeMatrices(userInput);
         } else if(choice == 2){
             addition();
         } else if(choice == 3){
@@ -98,8 +94,7 @@ public class matrix {
 
 
 
-    public void initializeArrays(Scanner userInput) throws NumberFormatException, InputMismatchException, FileNotFoundException{
-        //Scanner userInput = new Scanner(System.in);
+    public void initializeMatrices(Scanner userInput) throws NumberFormatException, InputMismatchException, FileNotFoundException{
         int inputMethod = 0;
         String fileName = "";
         boolean validNum = false;
@@ -147,11 +142,7 @@ public class matrix {
                     System.out.println("Error: Please only input integers.");
                     userInput.nextLine(); // Clear buffer
                     validNum = false;
-                } // catch (NumberFormatException e2){
-                //     System.out.println("Error: Please only input integers.");
-                //     userInput.nextLine(); // Clear buffer
-                //     validNum = false;
-                // }
+                }
             }while(!validNum);
 
             System.out.println("MatA size: "+rowA+" "+colA);
@@ -255,13 +246,6 @@ public class matrix {
         }
 
         printMatrices();
-
-
-        //??
-        //userInput.nextLine();
-
-
-        //userInput.close();
     }
 
     private void addition(){

@@ -9,23 +9,10 @@ public class Main {
         Scanner userInput = new Scanner(System.in);
         matrix start = new matrix();
         
-        
-        
-        //start.menu(userInput);
-        for(int i=0; i<2; i++){
-            start.menu(userInput);
-        }
-        //start.initializeArrays();
-        //start.menu();
-        // while(true){
-        //     start.menu();
-        //     if (menuResult == 5){
-        //         break;
-        //     }
-        // }
-        // do{
-        //     menuResult = start.menu();
-        // } while(menuResult != 5);
+        //start.initializeMatrices(userInput);
+        do{
+            menuResult = start.menu(userInput);
+        } while(menuResult != 5);
         
         userInput.close();
         System.out.println("End of program. Scanner closed.");
