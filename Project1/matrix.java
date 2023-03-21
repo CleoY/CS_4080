@@ -46,10 +46,12 @@ public class matrix {
         } while((inputMethod != 1) && (inputMethod != 2));
         userInput.nextLine(); //Clear buffer
 
-
+        // Matrix A size
         int rowA = 0;
         int colA = 0; 
         float temp = 0;
+
+        // Matrix B size
         int rowB = 0;
         int colB = 0;
 
@@ -125,61 +127,69 @@ public class matrix {
             fileScanner.nextLine();
 
             System.out.println("MatA size: "+rowA+" "+colA);
-            System.out.println("MatB size: "+rowB+" "+colB);
 
             int rowCounter = 0;
             int colCounter = 0;
 
+            // Scan for matrix A
             while(rowCounter < rowA){
+                //System.out.println("Row counter: "+rowCounter);
                 lineScanner = new Scanner(fileScanner.nextLine());
                 while(lineScanner.hasNextFloat()){
+                    //System.out.println("Col counter: "+colCounter);
                     temp = lineScanner.nextFloat();
-                    if(colCounter >= colA){
-                        colCounter = 0;
-                        break;
-                    }
+                    //System.out.println("Temp: "+ temp);
                     matrixA[rowCounter][colCounter] = temp;
                     colCounter++;
+                    if(colCounter >= colA){
+                        colCounter = 0;
+                        //System.out.println("break?");
+                        break;
+                    }
                 }
                 lineScanner.close();
                 rowCounter++;
+                //System.out.println("Row counter again: "+rowCounter);
             }
 
-            // while(fileScanner.hasNextLine()){
-            //     lineScanner = new Scanner(fileScanner.nextLine());
-            //     rowA = lineScanner.nextInt();
-            //     colA = lineScanner.nextInt();
-                
-                
-            //     lineScanner.close();
-            // }
-            
-            fileScanner.close();
-        //     Scanner fileScanner = new Scanner(file);    
-        //     while(fileScanner.hasNextLine()){
-        //         Scanner lineScanner = new Scanner(fileScanner.nextLine());
-        //         //System.out.println("\nLine "+ row);
-        //         col=0;
-        //         while(lineScanner.hasNextInt()){
-        //             temp = lineScanner.nextInt();
-        //             if(col < augmentedMatrix[row].length){
-        //                 augmentedMatrix[row][col] = temp;
-        //             } else{
-        //                 BVector[row] = temp;
-        //             }
-        //             col++;
-        //         }
-        //         row++;
-        //         lineScanner.close();
-        //     }
-        //     //System.out.println("Done processing text file.");
+            // Reset temp counters
+            rowCounter = 0;
+            colCounter = 0;
 
-        //     fileScanner.close();
-        }// }
+            // Initialize matrix B size
+            rowB = fileScanner.nextInt();
+            colB = fileScanner.nextInt();
+            matrixB = new float [rowB][colB];
+            fileScanner.nextLine();
+
+            System.out.println("MatB size: "+rowB+" "+colB);
+
+            // Scan for matrix B
+            while(rowCounter < rowB){
+                //System.out.println("Row counter: "+rowCounter);
+                lineScanner = new Scanner(fileScanner.nextLine());
+                while(lineScanner.hasNextFloat()){
+                    //System.out.println("Col counter: "+colCounter);
+                    temp = lineScanner.nextFloat();
+                    //System.out.println("Temp: "+ temp);
+                    matrixB[rowCounter][colCounter] = temp;
+                    colCounter++;
+                    if(colCounter >= colB){
+                        colCounter = 0;
+                        //System.out.println("break?");
+                        break;
+                    }
+                }
+                lineScanner.close();
+                rowCounter++;
+                //System.out.println("Row counter again: "+rowCounter);
+            }
+            fileScanner.close();
+        }
 
         printMatrices();
         userInput.close();
-        }
+    }
 
     private void printMatrices(){
         // Print augmented matrix
