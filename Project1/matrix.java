@@ -24,6 +24,13 @@ public class matrix {
      *      first line = size; then elements
      */
 
+     /**
+      * Display menu to user and let them choose a menu option
+      * @param userInput    Passed scanner from the main class so only 1 scanner is used throughout the lifetime of the program.
+      * @return             Returns user's choice. If choice = 5, indicate to main class to terminate program.
+      * @throws FileNotFoundException
+      * @throws InputMismatchException
+      */
      public int menu(Scanner userInput) throws FileNotFoundException, InputMismatchException{
         userInput = new Scanner(System.in);
         int choice = 0;
@@ -65,6 +72,9 @@ public class matrix {
         
     }
 
+    /**
+     * Just print the possible menu options.
+     */
     private void printMenuOptions(){
         System.out.println("");
         System.out.println("1: Upload 2 new matrices.");
@@ -75,7 +85,13 @@ public class matrix {
     }
 
 
-
+    /**
+     * Initialize the size and elements of matrixA and matrixB.
+     * @param userInput    Passed scanner from the main class so only 1 scanner is used throughout the lifetime of the program.
+     * @throws NumberFormatException
+     * @throws InputMismatchException
+     * @throws FileNotFoundException
+     */
     public void initializeMatrices(Scanner userInput) throws NumberFormatException, InputMismatchException, FileNotFoundException{
         int inputMethod = 0;
         String fileName = "";
@@ -110,12 +126,12 @@ public class matrix {
         if(inputMethod == 1){
             do{
                 try{
-                    System.out.println("Please enter the size of matrix 1 in the form of \"row col\".");
+                    System.out.println("Please enter the size of matrix A in the form of \"row col\".");
                     //input = userInput.nextLine();
                     rowA = userInput.nextInt();
                     colA = userInput.nextInt();
 
-                    System.out.println("Please enter the size of matrix 2 in the form of \"row col\".");
+                    System.out.println("Please enter the size of matrix B in the form of \"row col\".");
                     //input = userInput.nextLine();
                     rowB = userInput.nextInt();
                     colB = userInput.nextInt();
@@ -136,7 +152,7 @@ public class matrix {
 
             // Input matrices' elements
             for (int r=0; r<rowA; r++){
-                System.out.println("Please enter the elements for matrix 1 separated by spaces.");
+                System.out.println("Please enter the elements for matrix A separated by spaces.");
                 for (int c=0; c<colA; c++){
                     temp = userInput.nextFloat();
                     matrixA[r][c] = temp;
@@ -144,7 +160,7 @@ public class matrix {
             }
 
             for (int r=0; r<rowB; r++){
-                System.out.println("Please enter the elements for matrix 2 separated by spaces.");
+                System.out.println("Please enter the elements for matrix B separated by spaces.");
                 for (int c=0; c<colB; c++){
                     temp = userInput.nextFloat();
                     matrixA[r][c] = temp;
@@ -231,7 +247,13 @@ public class matrix {
     }
 
 
-
+    
+    /**
+     * Returns matrix after addition or subtraction between matrix A and B. 
+     * Option flag allows me to reuse code since addition and subtraction operations are similar.
+     * @param option    A flag for addition or subtraction
+     * @return          The resulting matrix after adding/subtracting matrixA and matrixB
+     */
     private float[][] additionOrSubtraction(int option){
         if(sizeValidation(1)){
             ///
@@ -279,21 +301,33 @@ public class matrix {
     }
     
 
-
+    /**
+     * Validates the size of matrixA and matrixB for addition, subtraction, or multiplication
+     * @param option    Choice between addition/subtraction or multiplication validation    
+     * @return          Returns a boolean indicating whether the matrices are of acceptable sizes.
+     */
     private boolean sizeValidation(int option){
         // opt 1: add or sub
         // 2: multi
         // add and sub requires that the matrices be exactly the same size
         // multi only requires first matrix cols = 2nd mat rows
+        if(option == 1){
+
+        }
         return false;
     }
 
     // delete later
     private void printMatrices(){
-        printMatrix(matrixA, "Matrix 1");
-        printMatrix(matrixB, "Matrix 2");
+        printMatrix(matrixA, "Matrix A");
+        printMatrix(matrixB, "Matrix B");
     }
 
+    /**
+     * Prints a matrix and a passed message, if any.
+     * @param given A given matrix to print
+     * @param msg   An associated message to print alongside the matrix
+     */
     private void printMatrix(float[][] given, String msg){
         System.out.println(msg);
         for(int i=0; i<given.length; i++){
