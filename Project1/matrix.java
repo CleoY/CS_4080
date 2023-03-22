@@ -2,6 +2,7 @@ package Project1;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
+import java.util.Random;
 import java.io.FileNotFoundException;
 import java.io.File;
 
@@ -67,7 +68,7 @@ public class matrix {
             System.out.println("Exiting program.");
         }
 
-        System.out.println("Choice: "+choice);
+        //System.out.println("Choice: "+choice);
         return choice; // If user inputs 5, exit.
         
     }
@@ -303,18 +304,7 @@ public class matrix {
         return intermediate;
     }
     
-    
-    // public void classicMultiplication(matrix matrixA, matrix matrixB){
-    //     int[][] matrixC = new int [matrixA.getMatrix().length][matrixA.getMatrix().length];
 
-    //     for(int i=0; i<matrixA.getMatrix().length; i++){
-    //         for(int j=0; j<matrixB.getMatrix().length; j++){
-    //             for(int k=0; k<matrixA.getMatrix()[i].length; k++){
-    //                 matrixC[i][j] += matrixA.getMatrix()[i][k] * matrixB.getMatrix()[k][j];
-    //             }
-    //         }
-    //     }
-    // }
 
     /**
      * Validates the size of matrixA and matrixB for addition, subtraction, or multiplication
@@ -338,6 +328,39 @@ public class matrix {
         }
         return true;
     }
+
+
+
+    /**
+     * Initialize matrixA and matrixB with random numbers given a desired size.
+     * @param size Length and height of each matrix. 
+     *      Square matrices so the lengths and heights will all be equivalent.
+     */
+    public void randomMatrices(int size){
+        matrixA = new float[size][size];
+        matrixB = new float[size][size];
+        Random rand = new Random();
+
+        for(int i=0; i<size; i++){
+            for(int j=0; j<size; j++){
+                matrixA[i][j] = rand.nextFloat() * (10.0f);
+                matrixB[i][j] = rand.nextFloat() * (10.0f);
+            }
+        }
+
+        // float randomNum = rand.nextFloat() * (max - min) + min;
+        printMatrices();
+    }
+
+    // public matrix(int size){
+    //     nSizeMatrix = new int[size][size];
+    //     for(int i=0; i<size; i++){
+    //         for(int j=0; j<size; j++){
+    //             nSizeMatrix[i][j] =(int) (Math.random()*(10-1)); // can change to dif range later, after testing
+    //         }
+    //     }
+    //     //saveMatrix();
+    // }
 
     // delete later
     private void printMatrices(){

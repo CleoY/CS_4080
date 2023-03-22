@@ -10,9 +10,10 @@ public class Main {
         matrix start = new matrix();
         
         //start.initializeMatrices(userInput);
-        do{
-            menuResult = start.menu(userInput);
-        } while(menuResult != 5);
+        start.randomMatrices(4);
+        // do{
+        //     menuResult = start.menu(userInput);
+        // } while(menuResult != 5);
         
         userInput.close();
         System.out.println("End of program. Scanner closed.");
