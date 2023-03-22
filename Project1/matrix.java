@@ -287,7 +287,7 @@ public class matrix {
      * @return  Return the product matrix.
      *          Return null and exit function if sizes of matrices are invalid.
      */
-    private float[][] multiplication(){
+    public float[][] multiplication(){
         if(!sizeValidation(2)){
             return null; // Exit function if sizes are invalid for multiplication.
         }
@@ -300,7 +300,7 @@ public class matrix {
                 }
             }
         }
-        printMatrix(intermediate, "\nResulting matrix: ");
+        //printMatrix(intermediate, "\nResulting matrix: ");
         return intermediate;
     }
     
@@ -348,8 +348,8 @@ public class matrix {
             }
         }
 
-        // float randomNum = rand.nextFloat() * (max - min) + min;
-        printMatrices();
+        
+        //printMatrices();
     }
 
     // public matrix(int size){
@@ -381,5 +381,6 @@ public class matrix {
             }
             System.out.println("");
         }
+        System.out.println("");
     }
 }

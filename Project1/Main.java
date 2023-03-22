@@ -2,6 +2,7 @@ package Project1;
 import java.io.IOException;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
+import java.time.Duration;
 
 public class Main {
     public static void main(String args[]) throws IOException, FileNotFoundException{       
@@ -9,12 +10,22 @@ public class Main {
         Scanner userInput = new Scanner(System.in);
         matrix start = new matrix();
         
-        //start.initializeMatrices(userInput);
-        start.randomMatrices(4);
+        // Normal main class
+        // start.initializeMatrices(userInput);
         // do{
         //     menuResult = start.menu(userInput);
         // } while(menuResult != 5);
         
+        // Code just for measuring time taken to complete multiplication function for nxn matrices
+        start.randomMatrices(256);
+
+        double beginning = System.nanoTime();
+        start.multiplication();
+        double end = System.nanoTime();
+        double duration = end - beginning;
+        duration /= 1000000;
+        System.out.println("Duration: "+duration+" ms");
+
         userInput.close();
         System.out.println("End of program. Scanner closed.");
     }
