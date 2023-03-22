@@ -178,7 +178,7 @@ public class matrix {
                 }
             } while(!file.exists());
             
-            System.out.println(file);
+            //System.out.println(file);
             
 
 
@@ -275,26 +275,9 @@ public class matrix {
                 }
             }
         }
-        printMatrix(intermediate, "Resulting matrix: ");
+        printMatrix(intermediate, "\nResulting matrix: ");
         return intermediate;
     }
-
-
-    // public int[][] addOrSubMatrices(int[][] matrixA, int[][] matrixB, int option){
-    //     int[][] intermediate = new int [matrixA.length][matrixA.length];
-    //     int size = matrixA.length;
-        
-    //     for(int i=0; i<size; i++){
-    //         for(int j=0; j<size; j++){
-    //             if(option == 1){
-    //                 intermediate[i][j] = matrixA[i][j] + matrixB[i][j];
-    //             } else{
-    //                 intermediate[i][j] = matrixA[i][j] - matrixB[i][j];
-    //             }
-    //         }
-    //     }
-    //     return intermediate;
-    // }
 
 
 
@@ -307,10 +290,31 @@ public class matrix {
         if(!sizeValidation(2)){
             return null; // Exit function if sizes are invalid for multiplication.
         }
-
-
+        // Intermediate matrix should have the same number of rows as matrixA and columns as matrixB
+        float[][] intermediate = new float[matrixA.length][matrixB[0].length];
+        for(int i=0; i<matrixA.length; i++){
+            for(int j=0; j<matrixB[0].length; j++){
+                for(int k=0; k<matrixA[i].length; k++){
+                    intermediate[i][j] += matrixA[i][k] * matrixB[k][j];
+                }
+            }
+        }
+        printMatrix(intermediate, "\nResulting matrix: ");
+        return intermediate;
     }
     
+    
+    // public void classicMultiplication(matrix matrixA, matrix matrixB){
+    //     int[][] matrixC = new int [matrixA.getMatrix().length][matrixA.getMatrix().length];
+
+    //     for(int i=0; i<matrixA.getMatrix().length; i++){
+    //         for(int j=0; j<matrixB.getMatrix().length; j++){
+    //             for(int k=0; k<matrixA.getMatrix()[i].length; k++){
+    //                 matrixC[i][j] += matrixA.getMatrix()[i][k] * matrixB.getMatrix()[k][j];
+    //             }
+    //         }
+    //     }
+    // }
 
     /**
      * Validates the size of matrixA and matrixB for addition, subtraction, or multiplication
