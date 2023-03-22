@@ -10,7 +10,7 @@ public class Main {
         Scanner userInput = new Scanner(System.in);
         matrix start = new matrix();
         
-        // Normal main class
+        // Normal driver code
         // start.initializeMatrices(userInput);
         // do{
         //     menuResult = start.menu(userInput);
