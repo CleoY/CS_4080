@@ -114,12 +114,12 @@ public class matrix {
         // Matrix A size
         int rowA = 0;
         int colA = 0; 
-        float temp = 0;
 
         // Matrix B size
         int rowB = 0;
         int colB = 0;
 
+        float temp = 0;
         validNum = false;
 
         // Enter the matrices' sizes and elements
@@ -180,6 +180,9 @@ public class matrix {
             
             System.out.println(file);
             
+
+
+            // Can try to make more efficient starting here
             Scanner fileScanner = new Scanner(file); 
             Scanner lineScanner;
             rowA = fileScanner.nextInt();
@@ -294,7 +297,17 @@ public class matrix {
     // }
 
 
-    private void multiplication(){
+
+    /**
+     * Multiply matrix A and B
+     * @return  Return the product matrix.
+     *          Return null and exit function if sizes of matrices are invalid.
+     */
+    private float[][] multiplication(){
+        if(!sizeValidation(2)){
+            return null; // Exit function if sizes are invalid for multiplication.
+        }
+
 
     }
     
@@ -305,10 +318,6 @@ public class matrix {
      * @return          Returns a boolean indicating whether the matrices are of acceptable sizes.
      */
     private boolean sizeValidation(int option){
-        // opt 1: add or sub
-        // 2: multi
-        // add and sub requires that the matrices be exactly the same size
-        // multi only requires first matrix cols = 2nd mat rows
         if(option == 1){ // addition or subtraction
             if((matrixA.length != matrixB.length) || (matrixA[0].length != matrixB[0].length)){
                 System.out.println("Error: matrix A and matrix B must be the same size.");
