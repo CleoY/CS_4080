@@ -38,7 +38,19 @@ int main(){
 
 
 int menu(){
-    printMenuOptions();
+    int choice;
+
+    do{
+        printMenuOptions();
+        if((scanf("%d", &choice) == 0) || 
+            ((choice != 1) && (choice != 2) && (choice != 3) 
+            && (choice != 4) && (choice != 5))){
+            while (getchar() != '\n'); // Clear buffer
+            printf("Error: Please only input an option from 1-5.\n");
+        }
+        
+    } while((choice != 1) && (choice != 2) && (choice != 3) && (choice != 4) && (choice != 5));
+    printf("Your choice is %d", choice);
 
     return 0;
 }
@@ -66,16 +78,16 @@ int initializeMatrices(){
         printf("Please enter the name of the file you would like to upload: ");
         fgets(fileName, sizeof(fileName), stdin);
         fileName[strcspn(fileName, "\n")] = '\0'; // remove the newline char
-        printf("The file name is %s\n", fileName);
+        //printf("The file name is %s\n", fileName);
         fp = fopen(fileName, "r");
-        
-        // scanf("%d", (FILE*) fp);
-        // printf("Row: %d", row);
         if(fp == NULL){
             printf("Error: File not found. Please try again.\n");
         }
     } while(fp == NULL);
-    printf("Out of loop.\n");
+
+
+
+
     fclose(fp);
     return 0;
 }
