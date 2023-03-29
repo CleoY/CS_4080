@@ -3,32 +3,22 @@
 #include <string.h>
 //#include "arrays.h"
 
+int menu();
+int printMenuOptions();
+int initializeMatrices();
+float additionOrSubtraction(int option);
+float multiplication();
+bool sizeValidation(int option);
+int randomMatrices(int size);
+int printMatrix(float (*given)[100]);
+
 float matrixA[100][100];
 float matrixB[100][100];
 
-
-
-
-#include <stdbool.h>
-// may change input
-int menu();
-
-int printMenuOptions();
-
-// may change
-int initializeMatrices();
-
-float addOrSubtraction();
-
-float multiplication();
-
-bool sizeValidation(int option);
-
-int randomMatrices(int size);
-
-int printMatrix(float (*given)[100]);
-
-
+int matrixARows;
+int matrixACols;
+int matrixBRows;
+int matrixBCols;
 
 int main(){
     initializeMatrices();
@@ -45,9 +35,9 @@ int menu(){
         if((scanf("%d", &choice) == 0) || 
             ((choice != 1) && (choice != 2) && (choice != 3) 
             && (choice != 4) && (choice != 5))){
-            while (getchar() != '\n'); // Clear buffer
             printf("Error: Please only input an option from 1-5.\n");
         }
+        while (getchar() != '\n'); // Clear buffer
         
     } while((choice != 1) && (choice != 2) && (choice != 3) && (choice != 4) && (choice != 5));
     //printf("Your choice is %d", choice);
@@ -63,7 +53,7 @@ int menu(){
     } else{
         printf("Exiting program.");
     }
-
+    while ((getchar()) != '\n'); // Clear buffer
     return 0;
 }
 
@@ -79,9 +69,10 @@ int printMenuOptions(){
 
 int initializeMatrices(){
     char fileName[100];
-    int row;
-    int col;
     FILE *fp;
+
+    char check; // For various file checks
+    int temp; 
 
     //int check; // For various validation checks
     
@@ -97,14 +88,43 @@ int initializeMatrices(){
         }
     } while(fp == NULL);
 
+    // Read size of matrixA from first line of file
+    fscanf(fp, "%d %d", &matrixARows, &matrixACols);
+    fscanf(fp, "%*c"); // Clear file reader buffer
+    printf("MatA size: %d %d", matrixARows, matrixACols);
 
+    // NEED to press enter after it prints, for some reason
+
+
+
+    int rowCounter = 0;
+    int colCounter = 0;
+
+    // check = fgetc(fp);
+    // while(check != EOF){
+    //     if(check != "\n"){
+    //         rowCounter++;
+    //         colCounter = 0;
+    //     }
+    //     fscanf(fp, "%d", &temp);
+    //     printf("Temp: %d", temp);
+    //     colCounter++;
+    //     check = fgetc(fp);
+    // }
+    /**
+     * point to a matrix with a temp matrix based on row counter
+     * change rowcounter/colcounter baserd on which matrix we should manipulate
+     * make sure we are not at the end of the file
+     * only read as many lines as rows specified by user
+     * get each int, separated by a space, and put into appropriate matrix
+    */
 
 
     fclose(fp);
     return 0;
 }
 
-float additionOrSubtraction(){
+float additionOrSubtraction(int option){
     return 0;
 }
 
@@ -112,39 +132,40 @@ float multiplication(){
     return 0;
 }
 
-bool sizeValidation(int option){
-    int matrixARows; // # of rows in matrix A
-    int matrixBRows;
-    int matrixACols;
-    int matrixBCols;
+// bool sizeValidation(int option){
+//     int matrixARows; // # of rows in matrix A
+//     int matrixBRows;
+//     int matrixACols;
+//     int matrixBCols;
 
-    if(option == 1){ // addition or subtraction
-        matrixARows = sizeof(matrixA)/sizeof(matrixA[0]);
-        matrixBRows = sizeof(matrixB)/sizeof(matrixB[0]);
-        matrixACols = sizeof(matrixA[0])/sizeof(matrixA[0][0]);
-        matrixBCols = sizeof(matrixB[0])/sizeof(matrixB[0][0]);
-        if((matrixARows != matrixBRows) || (matrixACols != matrixBCols)){
-            printf("Error: matrix A and matrix B must be the same size.\n");
-            printf("Please select another operation or choose 2 new matrices.\n");
-            return false;
-        } 
-    } else{ //multiplication
-        if(matrixACols != matrixBRows){
-            printf("Error: Cannot multiply matrix A by matrix B.\n");
-            printf("The number of columns in matrix A must equal the number of columns in matrix B.\n");
-            printf("Please select another operation or choose 2 new matrices.\n");
-            return false;
-        }
-    }
-    
-    return true;
-}
+//     if(option == 1){ // addition or subtraction
+//         matrixARows = sizeof(matrixA)/sizeof(matrixA[0]);
+//         matrixBRows = sizeof(matrixB)/sizeof(matrixB[0]);
+//         matrixACols = sizeof(matrixA[0])/sizeof(matrixA[0][0]);
+//         matrixBCols = sizeof(matrixB[0])/sizeof(matrixB[0][0]);
+//         if((matrixARows != matrixBRows) || (matrixACols != matrixBCols)){
+//             printf("Error: matrix A and matrix B must be the same size.\n");
+//             printf("Please select another operation or choose 2 new matrices.\n");
+//             return false;
+//         } 
+//     } else{ //multiplication
+//         if(matrixACols != matrixBRows){
+//             printf("Error: Cannot multiply matrix A by matrix B.\n");
+//             printf("The number of columns in matrix A must equal the number of columns in matrix B.\n");
+//             printf("Please select another operation or choose 2 new matrices.\n");
+//             return false;
+//         }
+//     }
+
+//     return true;
+// }
 
 int randomMatrices(int size){
     return 0;
 }
 
 int printMatrix(float (*given)[100]){
+    
     return 0;
 }
 
