@@ -63,7 +63,7 @@ int menu(){
     } else{
         printf("Exiting program.");
     }
-    
+
     return 0;
 }
 
@@ -113,7 +113,31 @@ float multiplication(){
 }
 
 bool sizeValidation(int option){
-    return 0;
+    int matrixARows; // # of rows in matrix A
+    int matrixBRows;
+    int matrixACols;
+    int matrixBCols;
+
+    if(option == 1){ // addition or subtraction
+        matrixARows = sizeof(matrixA)/sizeof(matrixA[0]);
+        matrixBRows = sizeof(matrixB)/sizeof(matrixB[0]);
+        matrixACols = sizeof(matrixA[0])/sizeof(matrixA[0][0]);
+        matrixBCols = sizeof(matrixB[0])/sizeof(matrixB[0][0]);
+        if((matrixARows != matrixBRows) || (matrixACols != matrixBCols)){
+            printf("Error: matrix A and matrix B must be the same size.\n");
+            printf("Please select another operation or choose 2 new matrices.\n");
+            return false;
+        } 
+    } else{ //multiplication
+        if(matrixACols != matrixBRows){
+            printf("Error: Cannot multiply matrix A by matrix B.\n");
+            printf("The number of columns in matrix A must equal the number of columns in matrix B.\n");
+            printf("Please select another operation or choose 2 new matrices.\n");
+            return false;
+        }
+    }
+    
+    return true;
 }
 
 int randomMatrices(int size){
