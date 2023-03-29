@@ -9,21 +9,6 @@ import java.io.File;
 public class matrix {
     private float[][] matrixA;
     private float[][] matrixB;
-    //private Scanner userInput;
-    /*
-     * +, -, x
-     * ask user to enter 2 matrices
-     * present menu that loops and asks user which oper
-     *      can exit menu
-     *      can choose 2 new matrices
-     * print result every time
-     * floats
-     * check matrices' sizes before oper
-     * can enter by:
-     *  - ask user size of each matrix, then elements
-     *  - ask user to input both matrices from one or 2 text files
-     *      first line = size; then elements
-     */
 
      /**
       * Display menu to user and let them choose a menu option
@@ -39,10 +24,6 @@ public class matrix {
         do{
             printMenuOptions();
             try {
-                // if((choice != 1) && (choice != 2) && (choice != 3)
-                //         && (choice != 4) && (choice != 5)){
-                //     System.out.println("Please only select option 1 - 5.");
-                // }
                 choice = userInput.nextInt();  
             } catch (InputMismatchException e){
                 System.out.println("Please only select option 1 - 5.");
@@ -54,8 +35,6 @@ public class matrix {
         } while((choice != 1) && (choice != 2) && (choice != 3)
                 && (choice != 4) && (choice != 5));
         
-        //System.out.println("Choice 1: "+choice);
-
         if(choice == 1){
             initializeMatrices(userInput);
         } else if(choice == 2){ // Addition
@@ -68,7 +47,6 @@ public class matrix {
             System.out.println("Exiting program.");
         }
 
-        //System.out.println("Choice: "+choice);
         return choice; // If user inputs 5, exit.
         
     }
@@ -128,12 +106,10 @@ public class matrix {
             do{
                 try{
                     System.out.println("Please enter the size of matrix A in the form of \"row col\".");
-                    //input = userInput.nextLine();
                     rowA = userInput.nextInt();
                     colA = userInput.nextInt();
 
                     System.out.println("Please enter the size of matrix B in the form of \"row col\".");
-                    //input = userInput.nextLine();
                     rowB = userInput.nextInt();
                     colB = userInput.nextInt();
                     validNum = true;
@@ -144,8 +120,6 @@ public class matrix {
                 }
             }while(!validNum);
 
-            // System.out.println("MatA size: "+rowA+" "+colA);
-            // System.out.println("MatB size: "+rowB+" "+colB);
 
             // Set sizes of matrices
             matrixA = new float[rowA][colA];
@@ -187,30 +161,24 @@ public class matrix {
             matrixA = new float [rowA][colA];
             fileScanner.nextLine();
 
-            //System.out.println("MatA size: "+rowA+" "+colA);
 
             int rowCounter = 0;
             int colCounter = 0;
 
             // Scan for matrix A
             while(rowCounter < rowA){
-                //System.out.println("Row counter: "+rowCounter);
                 lineScanner = new Scanner(fileScanner.nextLine());
                 while(lineScanner.hasNextFloat()){
-                    //System.out.println("Col counter: "+colCounter);
                     temp = lineScanner.nextFloat();
-                    //System.out.println("Temp: "+ temp);
                     matrixA[rowCounter][colCounter] = temp;
                     colCounter++;
                     if(colCounter >= colA){
                         colCounter = 0;
-                        //System.out.println("break?");
                         break;
                     }
                 }
                 lineScanner.close();
                 rowCounter++;
-                //System.out.println("Row counter again: "+rowCounter);
             }
 
             // Reset temp counters
@@ -222,8 +190,6 @@ public class matrix {
             colB = fileScanner.nextInt();
             matrixB = new float [rowB][colB];
             fileScanner.nextLine();
-
-            //System.out.println("MatB size: "+rowB+" "+colB);
 
             // Scan for matrix B
             while(rowCounter < rowB){
@@ -242,8 +208,6 @@ public class matrix {
             }
             fileScanner.close();
         }
-
-        printMatrices();
     }
 
 
@@ -287,6 +251,7 @@ public class matrix {
         if(!sizeValidation(2)){
             return null; // Exit function if sizes are invalid for multiplication.
         }
+
         // Intermediate matrix should have the same number of rows as matrixA and columns as matrixB
         float[][] intermediate = new float[matrixA.length][matrixB[0].length];
         for(int i=0; i<matrixA.length; i++){
@@ -343,17 +308,6 @@ public class matrix {
                 matrixB[i][j] = rand.nextFloat() * (10.0f);
             }
         }
-
-        
-        //printMatrices();
-    }
-
-    
-
-    // delete later
-    private void printMatrices(){
-        printMatrix(matrixA, "Matrix A");
-        printMatrix(matrixB, "Matrix B");
     }
 
     /**
