@@ -203,8 +203,16 @@ int multiplication(){
     if(!sizeValidation(2)){
         return 1; // Function failure
     }
-    
+
+    // Initialize intermediate matrix
     float intermediate[matrixARows][matrixBCols];
+    for(int i=0; i<matrixARows; i++){
+        for(int j=0; j<matrixBCols; j++){
+           intermediate[i][j] = 0.0; 
+        }
+    }
+
+    // Conduct matrix multiplication
     for(int i=0; i<matrixARows; i++){
         for(int j=0; j<matrixBCols; j++){
             for(int k=0; k<matrixACols; k++){
@@ -221,27 +229,6 @@ int multiplication(){
         }
         printf("\n");
     }
-
-    printf("MatrixA: \n");
-    for(int i=0; i<matrixARows; i++){
-        for(int j=0; j<matrixACols; j++){
-            printf("%f ", matrixA[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
-
-    printf("MatrixB: \n");
-    for(int i=0; i<matrixBRows; i++){
-        for(int j=0; j<matrixBCols; j++){
-            printf("%f ", matrixB[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
-
-
-
 
     return 0;
 }
