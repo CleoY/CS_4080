@@ -144,8 +144,8 @@ public class matrix {
                 }
             }while(!validNum);
 
-            System.out.println("MatA size: "+rowA+" "+colA);
-            System.out.println("MatB size: "+rowB+" "+colB);
+            // System.out.println("MatA size: "+rowA+" "+colA);
+            // System.out.println("MatB size: "+rowB+" "+colB);
 
             // Set sizes of matrices
             matrixA = new float[rowA][colA];

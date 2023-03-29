@@ -50,8 +50,20 @@ int menu(){
         }
         
     } while((choice != 1) && (choice != 2) && (choice != 3) && (choice != 4) && (choice != 5));
-    printf("Your choice is %d", choice);
+    //printf("Your choice is %d", choice);
 
+    if(choice == 1){
+        initializeMatrices();
+    } else if(choice == 2){
+        additionOrSubtraction(1);
+    } else if(choice == 3){
+        additionOrSubtraction(2);
+    } else if(choice == 4){
+        multiplication();
+    } else{
+        printf("Exiting program.");
+    }
+    
     return 0;
 }
 
@@ -92,7 +104,7 @@ int initializeMatrices(){
     return 0;
 }
 
-float addOrSubtraction(){
+float additionOrSubtraction(){
     return 0;
 }
 
