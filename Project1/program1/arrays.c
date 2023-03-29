@@ -10,7 +10,8 @@ float additionOrSubtraction(int option);
 float multiplication();
 bool sizeValidation(int option);
 int randomMatrices(int size);
-int printMatrix(float (*given)[100]);
+//int printMatrix(int rows, int cols, float given[rows][cols], char msg[]);
+int printMatrix(int cols, float given[][cols]);
 
 float matrixA[100][100];
 float matrixB[100][100];
@@ -53,7 +54,7 @@ int menu(){
     } else{
         printf("Exiting program.");
     }
-    while ((getchar()) != '\n'); // Clear buffer
+    //while ((getchar()) != '\n'); // Clear buffer
     return 0;
 }
 
@@ -72,7 +73,7 @@ int initializeMatrices(){
     FILE *fp;
 
     char check; // For various file checks
-    int temp; 
+    float temp; 
 
     //int check; // For various validation checks
     
@@ -91,16 +92,84 @@ int initializeMatrices(){
     // Read size of matrixA from first line of file
     fscanf(fp, "%d %d", &matrixARows, &matrixACols);
     fscanf(fp, "%*c"); // Clear file reader buffer
-    printf("MatA size: %d %d", matrixARows, matrixACols);
+    printf("MatA size: %d %d\n", matrixARows, matrixACols);
 
     // NEED to press enter after it prints, for some reason
 
 
+    //while (getchar() != '\n'); // Clear buffer
 
     int rowCounter = 0;
     int colCounter = 0;
 
-    // check = fgetc(fp);
+    /**
+     * point to a matrix with a temp matrix based on row counter
+     * change rowcounter/colcounter baserd on which matrix we should manipulate
+     * make sure we are not at the end of the file
+     * only read as many lines as rows specified by user
+     * get each int, separated by a space, and put into appropriate matrix
+    */
+    while(rowCounter < matrixARows){
+        while(colCounter < matrixACols){        // check != "\n"
+            fscanf(fp, "%f", &temp);
+            printf("Temp: %f ", temp);
+            printf("r: %d, c: %d\n", rowCounter, colCounter);
+            matrixA[rowCounter][colCounter] = temp;
+            printf(" MatrixA[r][c] = %f\n", matrixA[rowCounter][colCounter]);
+            colCounter++;
+            check = fgetc(fp);
+            //printf("check: %d\n", check); //print ascii code of whitespace
+            if(check == '\n'){
+                //printf("Check is a newline char \n");
+                break;
+            }
+        }
+        colCounter = 0;
+        rowCounter++;
+        printf("row counter: %d\n", rowCounter);
+    }
+    //printMatrix(matrixARows, matrixACols, matrixA, "Matrix A:\n");
+    printf("MatrixA: \n");
+    // printMatrix(matrixACols, matrixA);
+    for(int i=0; i<matrixARows; i++){
+        for(int j=0; j<matrixACols; j++){
+            printf("%f ", matrixA[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+
+// check = fgetc(fp);
+    // while(rowCounter < matrixARows){
+    //     while(check != "\n"){
+    //         fscanf(fp, "%d", &temp);
+    //         printf("Temp: %d", temp);
+    //     }
+    // }
+
+
+
+    // int maxRows = matrixARows;
+    // int maxCols = matrixACols;
+    //int *matrixPter = &matrixA[0][0]; // point to matrixA
+    // while (fgets(line, sizeof(line), fp)) {
+    //     int num;
+    //     int i = 0;
+
+    //     while (sscanf(&line[i], "%d", &num) == 1) {
+    //         printf("%d ", num);
+    //         i += sizeof(num);
+    //     }
+    //     printf("\n");
+    // }
+    
+    
+    
+
+
+
+
+ // check = fgetc(fp);
     // while(check != EOF){
     //     if(check != "\n"){
     //         rowCounter++;
@@ -111,14 +180,6 @@ int initializeMatrices(){
     //     colCounter++;
     //     check = fgetc(fp);
     // }
-    /**
-     * point to a matrix with a temp matrix based on row counter
-     * change rowcounter/colcounter baserd on which matrix we should manipulate
-     * make sure we are not at the end of the file
-     * only read as many lines as rows specified by user
-     * get each int, separated by a space, and put into appropriate matrix
-    */
-
 
     fclose(fp);
     return 0;
@@ -164,8 +225,34 @@ int randomMatrices(int size){
     return 0;
 }
 
-int printMatrix(float (*given)[100]){
-    
+int printMatrix(int cols, float given[][cols]){
+    for(int i=0; i<3; i++){
+        for(int j=0; j<cols; j++){
+            printf("%f ", given[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
     return 0;
 }
+
+// int printMatrix(int rows, int cols, float given[rows][cols], char msg[]){
+//     printf("\n%s", msg);
+//     for(int i=0; i<rows; i++){
+//         for(int j=0; j<cols; j++){
+//             printf("%f ", given[i][j]);
+//         }
+//         printf("\n");
+//     }
+//     printf("\n");
+    
+//     return 0;
+// }
+
+// int printMatrix(float (*given)[100]){
+//     if(&given == &matrixA){
+//         printf("Given is matrix A.\n");
+//     }
+//     return 0;
+// }
 
