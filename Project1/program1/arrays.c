@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
-//#include "arrays.h"
 
 int menu();
 int printMenuOptions();
@@ -9,10 +8,6 @@ int initializeMatrices();
 int additionOrSubtraction(int option);
 int multiplication();
 bool sizeValidation(int option);
-int randomMatrices(int size);
-//int printMatrix(int rows, int cols, float given[rows][cols], char msg[]);
-//int printMatrix(int cols, float given[][cols]);
-//int printMatrix(float** given, int rows, int cols, char msg[]);
 int printMatrix(int rows, int cols, float given[rows][cols], char msg[]);
 
 float matrixA[100][100];
@@ -86,21 +81,11 @@ int initializeMatrices(){
         printf("Please enter the name of the file you would like to upload: ");
         fgets(fileName, sizeof(fileName), stdin);
         fileName[strcspn(fileName, "\n")] = '\0'; // remove the newline char
-        //printf("The file name is %s\n", fileName);
         fp = fopen(fileName, "r");
         if(fp == NULL){
             printf("Error: File not found. Please try again.\n");
         }
     } while(fp == NULL);
-
-
-    // init matrix A
-    // for(int i=0; i<5; i++){
-    //     for(int j=0; j<5; j++){
-    //         matrixA[i][j] = 1.0;
-    //     }
-    // }
-
 
     // Read size of matrixA from first line of file
     fscanf(fp, "%d %d", &matrixARows, &matrixACols);
@@ -125,17 +110,7 @@ int initializeMatrices(){
     }
 
 
-    printf("MatrixA: \n");
-    for(int i=0; i<matrixARows; i++){
-        for(int j=0; j<matrixACols; j++){
-            printf("%f ", matrixA[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
-
-
-    // now upload matrix B
+    // Now upload matrix B
     fscanf(fp, "%d %d", &matrixBRows, &matrixBCols);
     fscanf(fp, "%*c"); // Clear file reader buffer
     printf("MatB size: %d %d\n", matrixBRows, matrixBCols);
@@ -156,15 +131,6 @@ int initializeMatrices(){
         colCounter = 0;
         rowCounter++;
     }
-
-    printf("MatrixB: \n");
-    for(int i=0; i<matrixBRows; i++){
-        for(int j=0; j<matrixBCols; j++){
-            printf("%f ", matrixB[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
 
     fclose(fp);
     return 0;
