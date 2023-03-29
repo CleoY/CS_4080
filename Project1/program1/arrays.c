@@ -8,7 +8,6 @@ int initializeMatrices();
 int additionOrSubtraction(int option);
 int multiplication();
 bool sizeValidation(int option);
-int printMatrix(int rows, int cols, float given[rows][cols], char msg[]);
 
 float matrixA[100][100];
 float matrixB[100][100];
@@ -90,7 +89,6 @@ int initializeMatrices(){
     // Read size of matrixA from first line of file
     fscanf(fp, "%d %d", &matrixARows, &matrixACols);
     fscanf(fp, "%*c"); // Clear file reader buffer
-    printf("MatA size: %d %d\n", matrixARows, matrixACols);
 
     int rowCounter = 0;
     int colCounter = 0;
@@ -113,7 +111,6 @@ int initializeMatrices(){
     // Now upload matrix B
     fscanf(fp, "%d %d", &matrixBRows, &matrixBCols);
     fscanf(fp, "%*c"); // Clear file reader buffer
-    printf("MatB size: %d %d\n", matrixBRows, matrixBCols);
 
     rowCounter = 0;
     colCounter = 0;
@@ -219,60 +216,3 @@ bool sizeValidation(int option){
     }
     return true;
 }
-
-int randomMatrices(int size){
-    return 0;
-}
-
-
-// current printMatrix function does not print as expected due to the way that arrays are stored in memory.
-// for the following matrix:
-/**
- * 1 2 3 0 0 0
- * 4 5 6 0 0 0 
- * 7 8 9 0 0 0
- * it will be stored as 1 2 3 0 0 0 4 5 6 0 0 0 7 8 9 0 0 0
- * which means you need to increment the row and col counters more to access the next row
-*/
-// int printMatrix(int rows, int cols, float given[rows][cols], char msg[]) {
-//     int i = 0;
-//     int j = 0;
-
-//     //Location(a[i][j]) = address(a[1][1]) + (i-1)*n*element_size + (j-1)*element_size
-//     // a[1][1] = a[0][0] + 99 cols + 1 row
-//     // last in row: a[0][3] (96 more cols unused + 1 row to get to a[1][1])
-
-
-//     printf("%s\n", msg);
-//     for(int i = 0; i < rows; i++) {
-//         for (int j = 0; j < cols; j++) {
-//             printf("%f ", given[i][j]);
-//         }
-//         // if(j < 100){
-//         //     i+=
-//         // }
-//         printf("\n");
-//     }
-//     return 0;
-
-//     // printf("%s\n", msg);
-//     // while(i<100){
-//     //     while(j<100){
-//     //         printf("%f ", given[i][j]);
-//     //         
-//     //         j++;
-//     //         if(j == cols){
-//     //             j=0;
-//     //             break;
-//     //         }
-//     //     }
-//     //     printf("\n"); 
-//     //     i+=(100-cols);
-//     //     if(i == rows){
-//     //         break;
-//     //     }
-//     // }
-//     // printf("\n");
-
-//     // return 0;
-// }
