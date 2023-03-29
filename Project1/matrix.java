@@ -282,7 +282,7 @@ public class matrix {
         } else{ // multiplication
             if(matrixA[0].length != matrixB.length){
                 System.out.println("Error: Cannot multiply matrix A by matrix B.");
-                System.out.println("The number of columns in matrix A must equal the number of columns in matrix B.");
+                System.out.println("The number of columns in matrix A must equal the number of rows in matrix B.");
                 System.out.println("Please select another operation or choose 2 new matrices.");
                 return false;
             }

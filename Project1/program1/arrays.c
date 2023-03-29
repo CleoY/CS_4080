@@ -24,8 +24,13 @@ int matrixBRows;
 int matrixBCols;
 
 int main(){
+    int menuResult = 0;
+
     initializeMatrices();
-    menu();
+    do{
+        menuResult = menu();
+    } while(menuResult != 5);
+    
     return 0;
 }
 
@@ -43,7 +48,6 @@ int menu(){
         while (getchar() != '\n'); // Clear buffer
         
     } while((choice != 1) && (choice != 2) && (choice != 3) && (choice != 4) && (choice != 5));
-    //printf("Your choice is %d", choice);
 
     if(choice == 1){
         initializeMatrices();
@@ -55,6 +59,7 @@ int menu(){
         multiplication();
     } else{
         printf("Exiting program.");
+        return 5;
     }
     //while ((getchar()) != '\n'); // Clear buffer
     return 0;
@@ -181,6 +186,7 @@ int additionOrSubtraction(int option){
             }
         }
     }
+
     // Print resulting matrix
     printf("Resulting matrix: \n");
     for(int i=0; i<matrixARows; i++){
@@ -200,13 +206,13 @@ int multiplication(){
     
     float intermediate[matrixARows][matrixBCols];
     for(int i=0; i<matrixARows; i++){
-        for(int j=0; i<matrixBCols; j++){
+        for(int j=0; j<matrixBCols; j++){
             for(int k=0; k<matrixACols; k++){
                 intermediate[i][j] += matrixA[i][k] * matrixB[k][j];
             }
         }
     }
-
+    
     // Print intermediate matrix
     printf("Resulting matrix: \n");
     for(int i=0; i<matrixARows; i++){
@@ -216,8 +222,32 @@ int multiplication(){
         printf("\n");
     }
 
+    printf("MatrixA: \n");
+    for(int i=0; i<matrixARows; i++){
+        for(int j=0; j<matrixACols; j++){
+            printf("%f ", matrixA[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+
+    printf("MatrixB: \n");
+    for(int i=0; i<matrixBRows; i++){
+        for(int j=0; j<matrixBCols; j++){
+            printf("%f ", matrixB[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+
+
+
+
     return 0;
 }
+
+
+
 
 bool sizeValidation(int option){
     if(option == 1){ // addition or subtraction
@@ -229,7 +259,7 @@ bool sizeValidation(int option){
     } else{ //multiplication
         if(matrixACols != matrixBRows){
             printf("Error: Cannot multiply matrix A by matrix B.\n");
-            printf("The number of columns in matrix A must equal the number of columns in matrix B.\n");
+            printf("The number of columns in matrix A must equal the number of rows in matrix B.\n");
             printf("Please select another operation or choose 2 new matrices.\n");
             return false;
         }
@@ -237,37 +267,10 @@ bool sizeValidation(int option){
     return true;
 }
 
-// bool sizeValidation(int option){
-//     int matrixARows; // # of rows in matrix A
-//     int matrixBRows;
-//     int matrixACols;
-//     int matrixBCols;
-
-//     if(option == 1){ // addition or subtraction
-//         matrixARows = sizeof(matrixA)/sizeof(matrixA[0]);
-//         matrixBRows = sizeof(matrixB)/sizeof(matrixB[0]);
-//         matrixACols = sizeof(matrixA[0])/sizeof(matrixA[0][0]);
-//         matrixBCols = sizeof(matrixB[0])/sizeof(matrixB[0][0]);
-//         if((matrixARows != matrixBRows) || (matrixACols != matrixBCols)){
-//             printf("Error: matrix A and matrix B must be the same size.\n");
-//             printf("Please select another operation or choose 2 new matrices.\n");
-//             return false;
-//         } 
-//     } else{ //multiplication
-//         if(matrixACols != matrixBRows){
-//             printf("Error: Cannot multiply matrix A by matrix B.\n");
-//             printf("The number of columns in matrix A must equal the number of columns in matrix B.\n");
-//             printf("Please select another operation or choose 2 new matrices.\n");
-//             return false;
-//         }
-//     }
-
-//     return true;
-// }
-
 int randomMatrices(int size){
     return 0;
 }
+
 
 // current printMatrix function does not print as expected due to the way that arrays are stored in memory.
 // for the following matrix:
@@ -278,90 +281,45 @@ int randomMatrices(int size){
  * it will be stored as 1 2 3 0 0 0 4 5 6 0 0 0 7 8 9 0 0 0
  * which means you need to increment the row and col counters more to access the next row
 */
-int printMatrix(int rows, int cols, float given[rows][cols], char msg[]) {
-    int i = 0;
-    int j = 0;
+// int printMatrix(int rows, int cols, float given[rows][cols], char msg[]) {
+//     int i = 0;
+//     int j = 0;
 
-    //Location(a[i][j]) = address(a[1][1]) + (i-1)*n*element_size + (j-1)*element_size
-    // a[1][1] = a[0][0] + 99 cols + 1 row
-    // last in row: a[0][3] (96 more cols unused + 1 row to get to a[1][1])
+//     //Location(a[i][j]) = address(a[1][1]) + (i-1)*n*element_size + (j-1)*element_size
+//     // a[1][1] = a[0][0] + 99 cols + 1 row
+//     // last in row: a[0][3] (96 more cols unused + 1 row to get to a[1][1])
 
-
-    printf("%s\n", msg);
-    for(int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            printf("%f ", given[i][j]);
-        }
-        // if(j < 100){
-        //     i+=
-        // }
-        printf("\n");
-    }
-    return 0;
-
-    // printf("%s\n", msg);
-    // while(i<100){
-    //     while(j<100){
-    //         printf("%f ", given[i][j]);
-    //         
-    //         j++;
-    //         if(j == cols){
-    //             j=0;
-    //             break;
-    //         }
-    //     }
-    //     printf("\n"); 
-    //     i+=(100-cols);
-    //     if(i == rows){
-    //         break;
-    //     }
-    // }
-    // printf("\n");
-
-    // return 0;
-}
-
-// int printMatrix(float** given, int rows, int cols, char msg[]){
 
 //     printf("%s\n", msg);
 //     for(int i = 0; i < rows; i++) {
 //         for (int j = 0; j < cols; j++) {
 //             printf("%f ", given[i][j]);
 //         }
+//         // if(j < 100){
+//         //     i+=
+//         // }
 //         printf("\n");
 //     }
 //     return 0;
+
+//     // printf("%s\n", msg);
+//     // while(i<100){
+//     //     while(j<100){
+//     //         printf("%f ", given[i][j]);
+//     //         
+//     //         j++;
+//     //         if(j == cols){
+//     //             j=0;
+//     //             break;
+//     //         }
+//     //     }
+//     //     printf("\n"); 
+//     //     i+=(100-cols);
+//     //     if(i == rows){
+//     //         break;
+//     //     }
+//     // }
+//     // printf("\n");
+
+//     // return 0;
 // }
-
-
-// int printMatrix(int cols, float given[][cols]){
-//     for(int i=0; i<3; i++){
-//         for(int j=0; j<cols; j++){
-//             printf("%f ", given[i][j]);
-//         }
-//         printf("\n");
-//     }
-//     printf("\n");
-//     return 0;
-// }
-
-// int printMatrix(int rows, int cols, float given[rows][cols], char msg[]){
-//     printf("\n%s", msg);
-//     for(int i=0; i<rows; i++){
-//         for(int j=0; j<cols; j++){
-//             printf("%f ", given[i][j]);
-//         }
-//         printf("\n");
-//     }
-//     printf("\n");
-    
-//     return 0;
-// }
-
-// int printMatrix(float (*given)[100]){
-//     if(&given == &matrixA){
-//         printf("Given is matrix A.\n");
-//     }
-//     return 0;
-// }
-
