@@ -11,7 +11,8 @@ float multiplication();
 bool sizeValidation(int option);
 int randomMatrices(int size);
 //int printMatrix(int rows, int cols, float given[rows][cols], char msg[]);
-int printMatrix(int cols, float given[][cols]);
+//int printMatrix(int cols, float given[][cols]);
+int printMatrix(float** given, int rows, int cols, char msg[]);
 
 float matrixA[100][100];
 float matrixB[100][100];
@@ -75,9 +76,6 @@ int initializeMatrices(){
     char check; // For various file checks
     float temp; 
 
-    //int check; // For various validation checks
-    
-    
     do{
         printf("Please enter the name of the file you would like to upload: ");
         fgets(fileName, sizeof(fileName), stdin);
@@ -95,20 +93,11 @@ int initializeMatrices(){
     printf("MatA size: %d %d\n", matrixARows, matrixACols);
 
     // NEED to press enter after it prints, for some reason
-
-
     //while (getchar() != '\n'); // Clear buffer
 
     int rowCounter = 0;
     int colCounter = 0;
 
-    /**
-     * point to a matrix with a temp matrix based on row counter
-     * change rowcounter/colcounter baserd on which matrix we should manipulate
-     * make sure we are not at the end of the file
-     * only read as many lines as rows specified by user
-     * get each int, separated by a space, and put into appropriate matrix
-    */
     while(rowCounter < matrixARows){
         while(colCounter < matrixACols){        // check != "\n"
             fscanf(fp, "%f", &temp);
@@ -128,58 +117,25 @@ int initializeMatrices(){
         rowCounter++;
         printf("row counter: %d\n", rowCounter);
     }
+
+    printMatrix((float**)matrixA, matrixARows, matrixACols, "MatrixA: ");
+
+    // print matrixA
     //printMatrix(matrixARows, matrixACols, matrixA, "Matrix A:\n");
-    printf("MatrixA: \n");
-    // printMatrix(matrixACols, matrixA);
-    for(int i=0; i<matrixARows; i++){
-        for(int j=0; j<matrixACols; j++){
-            printf("%f ", matrixA[i][j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
-
-// check = fgetc(fp);
-    // while(rowCounter < matrixARows){
-    //     while(check != "\n"){
-    //         fscanf(fp, "%d", &temp);
-    //         printf("Temp: %d", temp);
-    //     }
-    // }
-
-
-
-    // int maxRows = matrixARows;
-    // int maxCols = matrixACols;
-    //int *matrixPter = &matrixA[0][0]; // point to matrixA
-    // while (fgets(line, sizeof(line), fp)) {
-    //     int num;
-    //     int i = 0;
-
-    //     while (sscanf(&line[i], "%d", &num) == 1) {
-    //         printf("%d ", num);
-    //         i += sizeof(num);
+    // printf("MatrixA: \n");
+    // // printMatrix(matrixACols, matrixA);
+    // for(int i=0; i<matrixARows; i++){
+    //     for(int j=0; j<matrixACols; j++){
+    //         printf("%f ", matrixA[i][j]);
     //     }
     //     printf("\n");
     // }
-    
-    
-    
+    // printf("\n");
+
+    // now upload matrix B
 
 
 
-
- // check = fgetc(fp);
-    // while(check != EOF){
-    //     if(check != "\n"){
-    //         rowCounter++;
-    //         colCounter = 0;
-    //     }
-    //     fscanf(fp, "%d", &temp);
-    //     printf("Temp: %d", temp);
-    //     colCounter++;
-    //     check = fgetc(fp);
-    // }
 
     fclose(fp);
     return 0;
@@ -225,16 +181,29 @@ int randomMatrices(int size){
     return 0;
 }
 
-int printMatrix(int cols, float given[][cols]){
-    for(int i=0; i<3; i++){
-        for(int j=0; j<cols; j++){
+int printMatrix(float** given, int rows, int cols, char msg[]){
+
+    printf("%s\n", msg);
+    for(int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
             printf("%f ", given[i][j]);
         }
         printf("\n");
     }
-    printf("\n");
     return 0;
 }
+
+
+// int printMatrix(int cols, float given[][cols]){
+//     for(int i=0; i<3; i++){
+//         for(int j=0; j<cols; j++){
+//             printf("%f ", given[i][j]);
+//         }
+//         printf("\n");
+//     }
+//     printf("\n");
+//     return 0;
+// }
 
 // int printMatrix(int rows, int cols, float given[rows][cols], char msg[]){
 //     printf("\n%s", msg);
