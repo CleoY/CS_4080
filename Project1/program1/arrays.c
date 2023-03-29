@@ -6,8 +6,8 @@
 int menu();
 int printMenuOptions();
 int initializeMatrices();
-float additionOrSubtraction(int option);
-float multiplication();
+int additionOrSubtraction(int option);
+int multiplication();
 bool sizeValidation(int option);
 int randomMatrices(int size);
 //int printMatrix(int rows, int cols, float given[rows][cols], char msg[]);
@@ -15,7 +15,7 @@ int randomMatrices(int size);
 //int printMatrix(float** given, int rows, int cols, char msg[]);
 int printMatrix(int rows, int cols, float given[rows][cols], char msg[]);
 
-float matrixA[5][5];
+float matrixA[100][100];
 float matrixB[100][100];
 
 int matrixARows;
@@ -106,7 +106,7 @@ int initializeMatrices(){
     int colCounter = 0;
 
     while(rowCounter < matrixARows){
-        while(colCounter < matrixACols){}
+        while(colCounter < matrixACols){
             fscanf(fp, "%f", &temp);
             matrixA[rowCounter][colCounter] = temp;
             colCounter++;
@@ -165,20 +165,76 @@ int initializeMatrices(){
     return 0;
 }
 
-float additionOrSubtraction(int option){
-    printf("MatrixA in add: \n");
+int additionOrSubtraction(int option){
+    if(!sizeValidation(1)){
+        return 1;
+    }
+
+    // Can use matrixB's dimensions instead of matrixA's because they are equal
+    float intermediate[matrixARows][matrixACols];
     for(int i=0; i<matrixARows; i++){
         for(int j=0; j<matrixACols; j++){
-            printf("%f ", matrixA[i][j]);
+            if(option == 1){ // Addition
+                intermediate[i][j] = matrixA[i][j] + matrixB[i][j];
+            } else{ // Subtraction
+                intermediate[i][j] = matrixA[i][j] - matrixB[i][j];
+            }
+        }
+    }
+    // Print resulting matrix
+    printf("Resulting matrix: \n");
+    for(int i=0; i<matrixARows; i++){
+        for(int j=0; j<matrixACols; j++){
+            printf("%f ", intermediate[i][j]);
         }
         printf("\n");
     }
-    printf("\n");
+
     return 0;
 }
 
-float multiplication(){
+int multiplication(){
+    if(!sizeValidation(2)){
+        return 1; // Function failure
+    }
+    
+    float intermediate[matrixARows][matrixBCols];
+    for(int i=0; i<matrixARows; i++){
+        for(int j=0; i<matrixBCols; j++){
+            for(int k=0; k<matrixACols; k++){
+                intermediate[i][j] += matrixA[i][k] * matrixB[k][j];
+            }
+        }
+    }
+
+    // Print intermediate matrix
+    printf("Resulting matrix: \n");
+    for(int i=0; i<matrixARows; i++){
+        for(int j=0; j<matrixBCols; j++){
+            printf("%f ", intermediate[i][j]);
+        }
+        printf("\n");
+    }
+
     return 0;
+}
+
+bool sizeValidation(int option){
+    if(option == 1){ // addition or subtraction
+       if((matrixARows != matrixBRows) || (matrixACols != matrixBCols)){
+            printf("Error: matrix A and matrix B must be the same size.\n");
+            printf("Please select another operation or choose 2 new matrices.\n");
+            return false;
+        } 
+    } else{ //multiplication
+        if(matrixACols != matrixBRows){
+            printf("Error: Cannot multiply matrix A by matrix B.\n");
+            printf("The number of columns in matrix A must equal the number of columns in matrix B.\n");
+            printf("Please select another operation or choose 2 new matrices.\n");
+            return false;
+        }
+    }
+    return true;
 }
 
 // bool sizeValidation(int option){

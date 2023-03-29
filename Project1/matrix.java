@@ -179,10 +179,6 @@ public class matrix {
                 }
             } while(!file.exists());
             
-            //System.out.println(file);
-            
-
-
             // Can try to make more efficient starting here
             Scanner fileScanner = new Scanner(file); 
             Scanner lineScanner;
@@ -300,7 +296,7 @@ public class matrix {
                 }
             }
         }
-        //printMatrix(intermediate, "\nResulting matrix: ");
+        printMatrix(intermediate, "\nResulting matrix: ");
         return intermediate;
     }
     
