@@ -90,16 +90,11 @@ int initializeMatrices(){
 
 
     // init matrix A
-    for(int i=0; i<5; i++){
-        for(int j=0; j<5; j++){
-            matrixA[i][j] = 1.0;
-        }
-    }
-
-
-
-
-
+    // for(int i=0; i<5; i++){
+    //     for(int j=0; j<5; j++){
+    //         matrixA[i][j] = 1.0;
+    //     }
+    // }
 
 
     // Read size of matrixA from first line of file
@@ -107,38 +102,24 @@ int initializeMatrices(){
     fscanf(fp, "%*c"); // Clear file reader buffer
     printf("MatA size: %d %d\n", matrixARows, matrixACols);
 
-    // NEED to press enter after it prints, for some reason
-    //while (getchar() != '\n'); // Clear buffer
-
     int rowCounter = 0;
     int colCounter = 0;
 
     while(rowCounter < matrixARows){
-        while(colCounter < matrixACols){        // check != "\n"
+        while(colCounter < matrixACols){}
             fscanf(fp, "%f", &temp);
-            //printf("Temp: %f ", temp);
-            //printf("r: %d, c: %d\n", rowCounter, colCounter);
             matrixA[rowCounter][colCounter] = temp;
-            //printf(" MatrixA[r][c] = %f\n", matrixA[rowCounter][colCounter]);
             colCounter++;
             check = fgetc(fp);
-            //printf("check: %d\n", check); //print ascii code of whitespace
             if(check == '\n'){
-                //printf("Check is a newline char \n");
                 break;
             }
         }
         colCounter = 0;
         rowCounter++;
-        //printf("row counter: %d\n", rowCounter);
     }
 
-    //printMatrix((float**)matrixA, matrixARows, matrixACols, "MatrixA: ");
 
-    // print matrixA
-    // printMatrix(matrixARows, matrixACols, matrixA, "Matrix A:\n");
-    // printMatrix(matrixACols, matrixA);
-    
     printf("MatrixA: \n");
     for(int i=0; i<matrixARows; i++){
         for(int j=0; j<matrixACols; j++){
@@ -148,7 +129,6 @@ int initializeMatrices(){
     }
     printf("\n");
 
-    printMatrix(matrixARows, matrixACols, matrixA, "Matrix A: ");
 
     // now upload matrix B
     fscanf(fp, "%d %d", &matrixBRows, &matrixBCols);
@@ -159,23 +139,17 @@ int initializeMatrices(){
     colCounter = 0;
 
     while(rowCounter < matrixBRows){
-        while(colCounter < matrixBCols){        // check != "\n"
+        while(colCounter < matrixBCols){ 
             fscanf(fp, "%f", &temp);
-            //printf("Temp: %f ", temp);
-            //printf("r: %d, c: %d\n", rowCounter, colCounter);
             matrixB[rowCounter][colCounter] = temp;
-            //printf(" MatrixB[r][c] = %f\n", matrixB[rowCounter][colCounter]);
             colCounter++;
             check = fgetc(fp);
-            //printf("check: %d\n", check); //print ascii code of whitespace
             if(check == '\n'){
-                //printf("Check is a newline char \n");
                 break;
             }
         }
         colCounter = 0;
         rowCounter++;
-        //printf("row counter: %d\n", rowCounter);
     }
 
     printf("MatrixB: \n");
@@ -186,13 +160,6 @@ int initializeMatrices(){
         printf("\n");
     }
     printf("\n");
-    //printMatrix(matrixBRows, matrixBCols, matrixB);
-
-    // float matrix[3][4] = {{1.0, 2.0, 3.0, 4.0},
-    //                       {5.0, 6.0, 7.0, 8.0},
-    //                       {9.0, 10.0, 11.0, 12.0}};
-    // printMatrix(3, 4, matrix);
-
 
     fclose(fp);
     return 0;
