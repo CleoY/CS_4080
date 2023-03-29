@@ -13,9 +13,9 @@ int randomMatrices(int size);
 //int printMatrix(int rows, int cols, float given[rows][cols], char msg[]);
 //int printMatrix(int cols, float given[][cols]);
 //int printMatrix(float** given, int rows, int cols, char msg[]);
-int printMatrix(int rows, int cols, float given[rows][cols]);
+int printMatrix(int rows, int cols, float given[rows][cols], char msg[]);
 
-float matrixA[100][100];
+float matrixA[5][5];
 float matrixB[100][100];
 
 int matrixARows;
@@ -90,8 +90,8 @@ int initializeMatrices(){
 
 
     // init matrix A
-    for(int i=0; i<100; i++){
-        for(int j=0; j<100; j++){
+    for(int i=0; i<5; i++){
+        for(int j=0; j<5; j++){
             matrixA[i][j] = 1.0;
         }
     }
@@ -148,7 +148,7 @@ int initializeMatrices(){
     }
     printf("\n");
 
-    printMatrix(matrixARows, matrixACols, matrixA);
+    printMatrix(matrixARows, matrixACols, matrixA, "Matrix A: ");
 
     // now upload matrix B
     fscanf(fp, "%d %d", &matrixBRows, &matrixBCols);
@@ -186,12 +186,12 @@ int initializeMatrices(){
         printf("\n");
     }
     printf("\n");
-    printMatrix(matrixBRows, matrixBCols, matrixB);
+    //printMatrix(matrixBRows, matrixBCols, matrixB);
 
-    float matrix[3][4] = {{1.0, 2.0, 3.0, 4.0},
-                          {5.0, 6.0, 7.0, 8.0},
-                          {9.0, 10.0, 11.0, 12.0}};
-    printMatrix(3, 4, matrix);
+    // float matrix[3][4] = {{1.0, 2.0, 3.0, 4.0},
+    //                       {5.0, 6.0, 7.0, 8.0},
+    //                       {9.0, 10.0, 11.0, 12.0}};
+    // printMatrix(3, 4, matrix);
 
 
     fclose(fp);
@@ -255,14 +255,47 @@ int randomMatrices(int size){
  * it will be stored as 1 2 3 0 0 0 4 5 6 0 0 0 7 8 9 0 0 0
  * which means you need to increment the row and col counters more to access the next row
 */
-int printMatrix(int rows, int cols, float given[rows][cols]) {
-    for (int i = 0; i < rows; i++) {
+int printMatrix(int rows, int cols, float given[rows][cols], char msg[]) {
+    int i = 0;
+    int j = 0;
+
+    //Location(a[i][j]) = address(a[1][1]) + (i-1)*n*element_size + (j-1)*element_size
+    // a[1][1] = a[0][0] + 99 cols + 1 row
+    // last in row: a[0][3] (96 more cols unused + 1 row to get to a[1][1])
+
+
+    printf("%s\n", msg);
+    for(int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             printf("%f ", given[i][j]);
         }
+        // if(j < 100){
+        //     i+=
+        // }
         printf("\n");
     }
     return 0;
+
+    // printf("%s\n", msg);
+    // while(i<100){
+    //     while(j<100){
+    //         printf("%f ", given[i][j]);
+    //         
+    //         j++;
+    //         if(j == cols){
+    //             j=0;
+    //             break;
+    //         }
+    //     }
+    //     printf("\n"); 
+    //     i+=(100-cols);
+    //     if(i == rows){
+    //         break;
+    //     }
+    // }
+    // printf("\n");
+
+    // return 0;
 }
 
 // int printMatrix(float** given, int rows, int cols, char msg[]){
