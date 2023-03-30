@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string>
 #include <iostream>
-#include <cstring>
+#include <random>
 
 float** matrixA = NULL;
 float** matrixB = NULL;
@@ -25,13 +25,17 @@ int printMatrix(float** given, int rows, int cols);
 int main(){
     int valid = 0;
 
-    do{
-        valid = initializeMatrices();
-    } while(valid != 0);
+    randomMatrices(4);
+    multiplication();
 
-    do{
-        valid = menu();
-    } while(valid != 5);
+    // Normal driver code
+    // do{
+    //     valid = initializeMatrices();
+    // } while(valid != 0);
+
+    // do{
+    //     valid = menu();
+    // } while(valid != 5);
 
 
     // Deallocate matrixA and matrixB
@@ -305,17 +309,46 @@ bool sizeValidation(int option){
 
 
 
-int randomMatrics(int size){
+int randomMatrices(int size){
+    std::random_device rando;
+    std::mt19937 gen(rando());
+    std::uniform_real_distribution<float> dist(1.0f, 10.0f);
+    
+    float temp = dist(gen);
+    
+    // Allocate matrixA and matrixB
+    matrixA = new float*[size];
+    matrixB = new float*[size];
+    for(int i=0; i<size; i++){
+        matrixA[i] = new float[size];
+        matrixB[i] = new float[size];
+    }
+
+    // Initialize matrixA and matrixB with random floats
+    for(int i=0; i<size; i++){
+        for(int j=0; j<size; j++){
+            matrixA[i][j] = dist(gen);
+            matrixB[i][j] = dist(gen);
+        }
+    }
+    matrixARows = size;
+    matrixACols = size;
+    matrixBRows = size;
+    matrixBCols = size;
+
+    // Print matrices A and B
+    printf("Matrix A: \n");
+    printMatrix(matrixA, size, size);
+    printf("Matrix B: \n");
+    printMatrix(matrixB, size, size);
+    
+
     return 0;
 }
 
 
-//int printMatrix(float** given, int rows, int cols, std::string msg){
-int printMatrix(float** given, int rows, int cols){
-    //std::cout << msg << std::endl;
-    //printf("\n");
-    //printf("%s\n", msg);
 
+int printMatrix(float** given, int rows, int cols){
     for(int i=0; i<rows; i++){
         for(int j=0; j<cols; j++){
             printf("%f ", given[i][j]);
