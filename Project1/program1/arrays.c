@@ -18,15 +18,19 @@ int matrixBRows;
 int matrixBCols;
 
 int main(){
-    int menuResult = 0;
+    int valid = 0;
 
-    initializeMatrices();
     do{
-        menuResult = menu();
-    } while(menuResult != 5);
+        valid = initializeMatrices();
+    } while(valid != 0);
+
+    do{
+        valid = menu();
+    } while(valid != 5);
     
     return 0;
 }
+
 
 
 int menu(){
@@ -59,6 +63,8 @@ int menu(){
     return 0;
 }
 
+
+
 int printMenuOptions(){
     printf("\n");
     printf("1: Upload 2 new matrices.\n");
@@ -68,6 +74,8 @@ int printMenuOptions(){
     printf("5: Exit program.\n");
     return 0;
 }
+
+
 
 int initializeMatrices(){
     char fileName[100];
@@ -89,6 +97,11 @@ int initializeMatrices(){
     // Read size of matrixA from first line of file
     fscanf(fp, "%d %d", &matrixARows, &matrixACols);
     fscanf(fp, "%*c"); // Clear file reader buffer
+    if(matrixARows > 100 || matrixACols > 100){
+        printf("Error: Matrices must fit within 100 rows x 100 columns.\n");
+        printf("Please upload new matrices.\n");
+        return 1; // Function failure
+    }
 
     int rowCounter = 0;
     int colCounter = 0;
@@ -111,6 +124,12 @@ int initializeMatrices(){
     // Now upload matrix B
     fscanf(fp, "%d %d", &matrixBRows, &matrixBCols);
     fscanf(fp, "%*c"); // Clear file reader buffer
+    if(matrixBRows > 100 || matrixBCols > 100){
+        printf("Error: Matrices must fit within 100 rows x 100 columns.\n");
+        printf("Please upload new matrices.\n");
+        return 1; // Function failure
+    }
+
 
     rowCounter = 0;
     colCounter = 0;
@@ -132,6 +151,8 @@ int initializeMatrices(){
     fclose(fp);
     return 0;
 }
+
+
 
 int additionOrSubtraction(int option){
     if(!sizeValidation(1)){
@@ -161,6 +182,8 @@ int additionOrSubtraction(int option){
 
     return 0;
 }
+
+
 
 int multiplication(){
     if(!sizeValidation(2)){
@@ -195,7 +218,6 @@ int multiplication(){
 
     return 0;
 }
-
 
 
 
