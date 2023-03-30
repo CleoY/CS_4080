@@ -26,24 +26,23 @@ int printMatrix(float** given, int rows, int cols);
 int main(){
     int valid = 0;
 
-    // For measuring time taken by multiplication() function for matrices of different sizes
-    randomMatrices(2);
-    std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
-    multiplication();
-    std::chrono::high_resolution_clock::time_point finish = std::chrono::high_resolution_clock::now();
-    double duration = std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count();
-    duration /= 1000; // Convert from microseconds to ms
-    std::cout << "Duration: " << duration << " ms" << std::endl;
-
-
     // Normal driver code
     // do{
     //     valid = initializeMatrices();
     // } while(valid != 0);
-
     // do{
     //     valid = menu();
     // } while(valid != 5);
+
+
+    // For measuring time taken by multiplication() function for matrices of different sizes
+    // randomMatrices(2);
+    // std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
+    // multiplication();
+    // std::chrono::high_resolution_clock::time_point finish = std::chrono::high_resolution_clock::now();
+    // double duration = std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count();
+    // duration /= 1000; // Convert from microseconds to ms
+    // std::cout << "Duration: " << duration << " ms" << std::endl;
 
 
     // Deallocate matrixA and matrixB
@@ -282,8 +281,8 @@ int multiplication(){
     }
 
     // Print intermediate matrix
-    //printf("Resulting matrix: \n");
-    //printMatrix(intermediate, matrixARows, matrixBCols);
+    printf("Resulting matrix: \n");
+    printMatrix(intermediate, matrixARows, matrixBCols);
 
     // Delete intermediate matrix
     for(int i=0; i<matrixARows; i++){
