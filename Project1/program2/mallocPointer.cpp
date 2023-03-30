@@ -112,15 +112,11 @@ int initializeMatrices(){
     // Deallocate matrixA
     // In case user already initialized matrices and wants to use different matrices
     if(matrixA != NULL){
-        //printf("Matrix A is not null\n");
         for(int i=0; i<matrixARows; i++){
             delete[] matrixA[i];
         }
         delete[] matrixA;
         matrixA = NULL;
-        // if(matrixA == NULL){
-        //     printf("It is now null \n");
-        // }
     }
 
     // Deallocate matrixB
@@ -305,7 +301,7 @@ int multiplication(){
     
     // Print intermediate matrix
     printf("Resulting matrix: \n");
-    printMatrix(intermediate, matrixARows, matrixACols);
+    printMatrix(intermediate, matrixARows, matrixBCols);
 
     // printf("Resulting matrix: \n");
     // for(int i=0; i<matrixARows; i++){
