@@ -19,12 +19,9 @@ int additionOrSubtraction(int option);
 int multiplication();
 bool sizeValidation(int option);
 int randomMatrices(int size);
-//int printMatrix(float** given, int rows, int cols, char* msg);
-//int printMatrix(float** given, int rows, int cols, std::string msg);
 int printMatrix(float** given, int rows, int cols);
 
-// To run: gcc -x c++ mallocPointer.cpp -o malloc1
-// g++ mallocPointer.cpp -o malloc1 -lstdc++
+// To run: g++ mallocPointer.cpp -o malloc1 -lstdc++
 int main(){
     int valid = 0;
 
@@ -84,7 +81,6 @@ int menu(){
         printf("Exiting program.");
         return 5;
     }
-    //while ((getchar()) != '\n'); // Clear buffer
     return 0;
 }
 
@@ -154,14 +150,6 @@ int initializeMatrices(){
         matrixA[i] = new float[matrixACols];
     }
 
-
-    // C way to allocate memory with malloc
-    // matrixA = (float **)malloc(matrixARows * sizeof(float*));
-    // for(int i=0; i<matrixARows; i++){
-    //     matrixA[i] = (float*) malloc(matrixACols * sizeof(float));
-    // }
-
-
     int rowCounter = 0;
     int colCounter = 0;
 
@@ -211,14 +199,6 @@ int initializeMatrices(){
         rowCounter++;
     }
 
-    printf("Matrix A: \n");
-    printMatrix(matrixA, matrixARows, matrixACols);
-    printf("Matrix B: \n");
-    printMatrix(matrixB, matrixBRows, matrixBCols);
-
-    // printMatrix(matrixA, matrixARows, matrixACols, "Matrix A: ");
-    // printMatrix(matrixB, matrixBRows, matrixBCols, "Matrix B: ");
-
     fclose(fp);
     return 0;
 }
@@ -250,16 +230,6 @@ int additionOrSubtraction(int option){
     // Print resulting matrix
     printf("Resulting matrix: \n");
     printMatrix(intermediate, matrixARows, matrixACols);
-    
-    //printMatrix(intermediate, matrixARows, matrixACols, "Resulting matrix: ");
-    
-    // printf("Resulting matrix: \n");
-    // for(int i=0; i<matrixARows; i++){
-    //     for(int j=0; j<matrixACols; j++){
-    //         printf("%f ", intermediate[i][j]);
-    //     }
-    //     printf("\n");
-    // }
 
     // Delete intermediate matrix
     for(int i=0; i<matrixARows; i++){
@@ -298,18 +268,10 @@ int multiplication(){
             }
         }
     }
-    
+
     // Print intermediate matrix
     printf("Resulting matrix: \n");
     printMatrix(intermediate, matrixARows, matrixBCols);
-
-    // printf("Resulting matrix: \n");
-    // for(int i=0; i<matrixARows; i++){
-    //     for(int j=0; j<matrixBCols; j++){
-    //         printf("%f ", intermediate[i][j]);
-    //     }
-    //     printf("\n");
-    // }
 
     // Delete intermediate matrix
     for(int i=0; i<matrixARows; i++){
