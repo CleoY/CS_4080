@@ -26,7 +26,8 @@ int printMatrix(float** given, int rows, int cols);
 int main(){
     int valid = 0;
 
-    randomMatrices(4);
+    // For measuring time taken by multiplication() function for matrices of different sizes
+    randomMatrices(2);
     std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
     multiplication();
     std::chrono::high_resolution_clock::time_point finish = std::chrono::high_resolution_clock::now();
@@ -281,8 +282,8 @@ int multiplication(){
     }
 
     // Print intermediate matrix
-    printf("Resulting matrix: \n");
-    printMatrix(intermediate, matrixARows, matrixBCols);
+    //printf("Resulting matrix: \n");
+    //printMatrix(intermediate, matrixARows, matrixBCols);
 
     // Delete intermediate matrix
     for(int i=0; i<matrixARows; i++){
@@ -344,10 +345,10 @@ int randomMatrices(int size){
     matrixBCols = size;
 
     // Print matrices A and B
-    printf("Matrix A: \n");
-    printMatrix(matrixA, size, size);
-    printf("Matrix B: \n");
-    printMatrix(matrixB, size, size);
+    // printf("Matrix A: \n");
+    // printMatrix(matrixA, size, size);
+    // printf("Matrix B: \n");
+    // printMatrix(matrixB, size, size);
     
 
     return 0;
