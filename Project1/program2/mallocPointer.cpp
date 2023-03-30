@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <random>
+#include <chrono>
 
 float** matrixA = NULL;
 float** matrixB = NULL;
@@ -26,7 +27,13 @@ int main(){
     int valid = 0;
 
     randomMatrices(4);
+    std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
     multiplication();
+    std::chrono::high_resolution_clock::time_point finish = std::chrono::high_resolution_clock::now();
+    double duration = std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count();
+    duration /= 1000; // Convert from microseconds to ms
+    std::cout << "Duration: " << duration << " ms" << std::endl;
+
 
     // Normal driver code
     // do{
