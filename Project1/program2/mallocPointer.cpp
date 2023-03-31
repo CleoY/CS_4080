@@ -27,12 +27,12 @@ int main(){
     int valid = 0;
 
     // Normal driver code
-    // do{
-    //     valid = initializeMatrices();
-    // } while(valid != 0);
-    // do{
-    //     valid = menu();
-    // } while(valid != 5);
+    do{
+        valid = initializeMatrices();
+    } while(valid != 0);
+    do{
+        valid = menu();
+    } while(valid != 5);
 
 
     // For measuring time taken by multiplication() function for matrices of different sizes
