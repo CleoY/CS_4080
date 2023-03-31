@@ -149,11 +149,6 @@ int initializeMatrices(){
     // Read size of matrixA from first line of file
     fscanf(fp, "%d %d", &matrixARows, &matrixACols);
     fscanf(fp, "%*c"); // Clear file reader buffer
-    if(matrixARows > 100 || matrixACols > 100){
-        printf("Error: Matrices must fit within 100 rows x 100 columns.\n");
-        printf("Please upload new matrices.\n");
-        return 1; // Function failure
-    }
 
     // Allocate space for matrixA
     matrixA = new float*[matrixARows];
@@ -182,11 +177,6 @@ int initializeMatrices(){
     // Now upload matrix B
     fscanf(fp, "%d %d", &matrixBRows, &matrixBCols);
     fscanf(fp, "%*c"); // Clear file reader buffer
-    if(matrixBRows > 100 || matrixBCols > 100){
-        printf("Error: Matrices must fit within 100 rows x 100 columns.\n");
-        printf("Please upload new matrices.\n");
-        return 1; // Function failure
-    }
 
     // Allocate space for matrixB
     matrixB = new float*[matrixBRows];
