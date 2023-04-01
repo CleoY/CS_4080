@@ -311,8 +311,6 @@ int randomMatrices(int size){
     std::mt19937 gen(rando());
     std::uniform_real_distribution<float> dist(1.0f, 10.0f);
     
-    float temp = dist(gen);
-    
     // Allocate matrixA and matrixB
     matrixA = new float*[size];
     matrixB = new float*[size];
@@ -339,7 +337,6 @@ int randomMatrices(int size){
     // printf("Matrix B: \n");
     // printMatrix(matrixB, size, size);
     
-
     return 0;
 }
 

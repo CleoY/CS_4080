@@ -121,3 +121,16 @@ int initializeMatrices(){
     fclose(fp);
     return 0;
 }
+
+
+
+
+int randomMatrices(int size){
+    matrixA = new Matrix(size);
+    matrixB = new Matrix(size);
+    
+    // Print matrices
+    matrixA->print();
+    matrixB->print();
+}
+

@@ -10,10 +10,7 @@ class Matrix{
             matrix1 = NULL;
             exist = true;
         }
-        Matrix(int size){ // For initializing with random values
-            Matrix(size, size);
-        }
-        Matrix(int nRows, int nCols){
+        Matrix(int nRows, int nCols, bool init0){
             rows = nRows;
             cols = nCols;
             exist = true;
@@ -24,10 +21,26 @@ class Matrix{
                 matrix1[i] = new float[cols];
             }
 
-            // Initialize cells as 0's
-            for(int i=0; i<rows; i++){
-                for(int j=0; j<cols; j++){
-                    matrix1[i][j] = 0.0; 
+            // Initialize cells as 0's but only if user does not want to populate the matrix with random values
+            if(init0){
+                for(int i=0; i<rows; i++){
+                    for(int j=0; j<cols; j++){
+                        matrix1[i][j] = 0.0; 
+                    }
+                }
+            }
+            
+        }
+        Matrix(int size){ // For initializing with random values
+            Matrix(size, size, false);
+            std::random_device rando;
+            std::mt19937 gen(rando());
+            std::uniform_real_distribution<float> dist(1.0f, 10.0f);
+
+            // Initialize matrix with random floats
+            for(int i=0; i<size; i++){
+                for(int j=0; j<size; j++){
+                    matrix1[i][j] = dist(gen);
                 }
             }
         }
@@ -74,7 +87,7 @@ class Matrix{
 
 
         Matrix operator+(const Matrix& addend){
-            Matrix result(this->rows, this->cols);
+            Matrix result(this->rows, this->cols, false); // may need to initialize with 0's (true) 
 
             for(int i=0; i<rows; i++){
                 for(int j=0; j<rows; j++){
@@ -86,7 +99,7 @@ class Matrix{
         }
 
         Matrix operator-(const Matrix& subtrahend){
-            Matrix result(this->rows, this->cols);
+            Matrix result(this->rows, this->cols, false); // may need to initialize with 0's (true) 
 
             for(int i=0; i<rows; i++){
                 for(int j=0; j<rows; j++){
@@ -100,7 +113,7 @@ class Matrix{
         Matrix operator*(const Matrix& multiplicand){
             int nRows = this->rows; // matrixA rows
             int nCols = multiplicand.cols; // matrixB cols
-            Matrix result(nRows, nCols);
+            Matrix result(nRows, nCols, true);
             
             for(int i=0; i<nRows; i++){
                 for(int j=0; j<nCols; j++){
@@ -118,9 +131,10 @@ class Matrix{
         // }
 
 
-        int randomMatrix(int size){
-
-        }
+        // Matrix randomMatrix(int size){
+        //     Matrix result(size);
+        //     return result;
+        // }
 
         int print(){
             if(matrix1 == NULL){
