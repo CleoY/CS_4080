@@ -2,9 +2,7 @@
 #include <random>
 #include <chrono>
 
-Matrix* matrixA;
-Matrix* matrixB;
-
+// Function signatures
 int menu();
 int printMenuOptions();
 int initializeMatrices();
@@ -14,7 +12,34 @@ int multiplication();
 bool sizeValidation(int option);
 int randomMatrices(int size);
 
+// Matrix class signature
+class Matrix{
+    private:
+        float** matrix1;
+        int rows;
+        int cols;
+        bool exist;
 
+    public:
+        Matrix();
+        Matrix(int nRows, int nCols, bool init0);
+        Matrix(int size);
+        Matrix(FILE *fp);
+        ~Matrix();
+        int getRows();
+        int getCols();
+        Matrix operator+(const Matrix& addend)const;
+        Matrix operator-(const Matrix& subtrahend)const;
+        Matrix operator*(const Matrix& multiplicand)const;
+        int print();
+};
+
+
+Matrix* matrixA;
+Matrix* matrixB;
+
+
+// To run: g++ m.cpp -o mat -lstdc++
 int main(){
     int valid = 0;
 
@@ -139,9 +164,9 @@ int addition(){
     if(!sizeValidation(1)){
         return 1;
     }
-    Matrix* sum = *matrixA + *matrixB; // Overloaded + operation
+    Matrix sum = (*matrixA) + (*matrixB); // Overloaded + operation
     printf("Sum matrix: \n");
-    sum->print();
+    sum.print();
 
     // Deallocate resulting matrix
     delete sum;
@@ -155,7 +180,7 @@ int subtraction(){
     if(!sizeValidation(1)){
         return 1;
     }
-    Matrix* difference = *matrixA - *matrixB; // Overloaded + operation
+    Matrix* difference = (*matrixA) - (*matrixB); // Overloaded + operation
     printf("Difference matrix: \n");
     difference->print();
     
@@ -171,7 +196,7 @@ int multiplication(){
     if(!sizeValidation(2)){
         return 1;
     }
-    Matrix* product = (*matrixA) * (matrixB);
+    Matrix* product = (*matrixA) * (*matrixB);
     printf("Product matrix: \n");
     product->print();
     
@@ -187,13 +212,13 @@ int multiplication(){
 
 bool sizeValidation(int option){
     if(option == 1){ // addition or subtraction
-       if((matrixA->getRows != matrixB->getRows) || (matrixA->cols != matrixB->cols)){
+       if((matrixA->getRows() != matrixB->getRows()) || (matrixA->getCols() != matrixB->getCols())){
             printf("Error: matrix A and matrix B must be the same size.\n");
             printf("Please select another operation or choose 2 new matrices.\n");
             return false;
         } 
     } else{ //multiplication
-        if(matrixA->getCols != matrixB->getRows){
+        if(matrixA->getCols() != matrixB->getRows()){
             printf("Error: Cannot multiply matrix A by matrix B.\n");
             printf("The number of columns in matrix A must equal the number of rows in matrix B.\n");
             printf("Please select another operation or choose 2 new matrices.\n");
@@ -314,7 +339,7 @@ class Matrix{
             return this->cols;
         }
 
-        Matrix operator+(const Matrix& addend){
+        Matrix operator+(const Matrix& addend) const{
             Matrix result(this->rows, this->cols, false); // may need to initialize with 0's (true) 
 
             for(int i=0; i<rows; i++){
@@ -326,7 +351,7 @@ class Matrix{
             return result;
         }
 
-        Matrix operator-(const Matrix& subtrahend){
+        Matrix operator-(const Matrix& subtrahend) const{
             Matrix result(this->rows, this->cols, false); // may need to initialize with 0's (true) 
 
             for(int i=0; i<rows; i++){
@@ -338,7 +363,7 @@ class Matrix{
             return result;
         }
 
-        Matrix operator*(const Matrix& multiplicand){
+        Matrix operator*(const Matrix& multiplicand) const{
             int nRows = this->rows; // matrixA rows
             int nCols = multiplicand.cols; // matrixB cols
             Matrix result(nRows, nCols, true);
@@ -354,15 +379,6 @@ class Matrix{
             return result;
         }
 
-        // bool existenceCheck(){
-        //     return exist;
-        // }
-
-
-        // Matrix randomMatrix(int size){
-        //     Matrix result(size);
-        //     return result;
-        // }
 
         int print(){
             if(matrix1 == NULL){
@@ -382,6 +398,6 @@ class Matrix{
         float** matrix1;
         int rows;
         int cols;
-        bool exist = false; // initial value should not cause issues?
+        bool exist; // = false; // initial value should not cause issues?
 
 };

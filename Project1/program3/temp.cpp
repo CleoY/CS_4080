@@ -161,6 +161,6 @@ class Matrix{
         float** matrix1;
         int rows;
         int cols;
-        bool exist = false; // initial value should not cause issues?
+        bool exist;// = false; // initial value should not cause issues?
 
 };
