@@ -16,13 +16,14 @@ int matrixBCols;
 int menu();
 int printMenuOptions();
 int initializeMatrices();
-int additionOrSubtraction(int option);
-int multiplication();
+float** additionOrSubtraction(int option);
+float** multiplication();
 bool sizeValidation(int option);
 int randomMatrices(int size);
 int printMatrix(float** given, int rows, int cols);
 
 // To run: g++ mallocPointer.cpp -o malloc1 -lstdc++
+// Then: ./malloc1
 int main(){
     int valid = 0;
 
@@ -83,11 +84,49 @@ int menu(){
     if(choice == 1){
         initializeMatrices();
     } else if(choice == 2){
-        additionOrSubtraction(1);
+        float** intermediate = additionOrSubtraction(1);
+        if(intermediate != NULL){
+            // Print resulting matrix
+            printf("Resulting matrix: \n");
+            printMatrix(intermediate, matrixARows, matrixACols);
+
+            // Delete intermediate matrix
+            for(int i=0; i<matrixARows; i++){
+                delete[] intermediate[i];
+            }
+            delete[] intermediate;
+        }
+        intermediate = NULL;
     } else if(choice == 3){
-        additionOrSubtraction(2);
+        float** intermediate = additionOrSubtraction(2);
+        
+        if(intermediate != NULL){
+            // Print resulting matrix
+            printf("Resulting matrix: \n");
+            printMatrix(intermediate, matrixARows, matrixACols);
+
+            // Delete intermediate matrix
+            for(int i=0; i<matrixARows; i++){
+                delete[] intermediate[i];
+            }
+            delete[] intermediate;
+        }
+        intermediate = NULL;
     } else if(choice == 4){
-        multiplication();
+        float** intermediate = multiplication();
+
+        if(intermediate != NULL){
+            // Print intermediate matrix
+            printf("Resulting matrix: \n");
+            printMatrix(intermediate, matrixARows, matrixBCols);
+
+            // Delete intermediate matrix
+            for(int i=0; i<matrixARows; i++){
+                delete[] intermediate[i];
+            }
+            delete[] intermediate;
+        }
+        intermediate = NULL;
     } else{
         printf("Exiting program.");
         return 5;
@@ -206,9 +245,9 @@ int initializeMatrices(){
 
 
 
-int additionOrSubtraction(int option){
+float** additionOrSubtraction(int option){
     if(!sizeValidation(1)){
-        return 1;
+        return NULL;
     }
 
     // Allocate space for intermediate matrix
@@ -227,26 +266,14 @@ int additionOrSubtraction(int option){
             }
         }
     }
-
-    // Print resulting matrix
-    printf("Resulting matrix: \n");
-    printMatrix(intermediate, matrixARows, matrixACols);
-
-    // Delete intermediate matrix
-    for(int i=0; i<matrixARows; i++){
-        delete[] intermediate[i];
-    }
-    delete[] intermediate;
-    intermediate = NULL;
-
-    return 0;
+    return intermediate;
 }
 
 
 
-int multiplication(){
+float** multiplication(){
     if(!sizeValidation(2)){
-        return 1; // Function failure
+        return NULL; // Function failure
     }
 
     // Initialize intermediate matrix
@@ -270,18 +297,7 @@ int multiplication(){
         }
     }
 
-    // Print intermediate matrix
-    printf("Resulting matrix: \n");
-    printMatrix(intermediate, matrixARows, matrixBCols);
-
-    // Delete intermediate matrix
-    for(int i=0; i<matrixARows; i++){
-        delete[] intermediate[i];
-    }
-    delete[] intermediate;
-    intermediate = NULL;
-
-    return 0;
+    return intermediate;
 }
 
 
