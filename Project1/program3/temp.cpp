@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <random>
-#include <chrono>
 
 class Matrix{
     public:
@@ -85,6 +84,14 @@ class Matrix{
             exist = false;
         }
 
+        // Get functions
+        int getRows(){
+            return this->rows;
+        }
+        
+        int getCols(){
+            return this->cols;
+        }
 
         Matrix operator+(const Matrix& addend){
             Matrix result(this->rows, this->cols, false); // may need to initialize with 0's (true) 
