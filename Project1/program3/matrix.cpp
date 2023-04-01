@@ -23,6 +23,7 @@ Matrix* matrixB;
 // Recomment timing code
 
 // To run: g++ matrix.cpp -o matrix -lstdc++
+// Then: ./matrix
 int main(){
     int valid = 0;
 
@@ -35,7 +36,7 @@ int main(){
     // } while(valid != 5);
 
     // For measuring time taken by multiplication() function for matrices of different sizes
-    randomMatrices(2);
+    randomMatrices(1024);
     std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
     multiplication();
     std::chrono::high_resolution_clock::time_point finish = std::chrono::high_resolution_clock::now();
@@ -197,8 +198,8 @@ int multiplication(){
         return 1;
     }
     Matrix product = (*matrixA) * (*matrixB);
-    printf("Product matrix: \n");
-    product.print();
+    //printf("Product matrix: \n");
+    //product.print();
     
     // Deallocate resulting matrix
     product.~Matrix();
@@ -235,9 +236,10 @@ int randomMatrices(int size){
     matrixB = new Matrix(size);
     
     // Print matrices
-    printf("Matrix A: \n");
-    matrixA->print();
-    printf("Matrix B: \n");
-    matrixB->print();
+    // printf("Matrix A: \n");
+    // matrixA->print();
+    // printf("Matrix B: \n");
+    // matrixB->print();
+
     return 0;
 }

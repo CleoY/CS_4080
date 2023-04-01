@@ -10,14 +10,14 @@ public class Main {
         Scanner userInput = new Scanner(System.in);
         matrix start = new matrix();
         
-        // Normal driver code
+        //Normal driver code
         start.initializeMatrices(userInput);
         do{
             menuResult = start.menu(userInput);
         } while(menuResult != 5);
         
         // Code just for measuring time taken to complete multiplication function for nxn matrices
-        // start.randomMatrices(256);
+        // start.randomMatrices(1024);
 
         // double beginning = System.nanoTime();
         // start.multiplication();
