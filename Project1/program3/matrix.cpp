@@ -19,8 +19,6 @@ int randomMatrices(int size);
 Matrix* matrixA;
 Matrix* matrixB;
 
-// Uncomment driver code and resulting matrix operations
-// Recomment timing code
 
 // To run: g++ matrix.cpp -o matrix -lstdc++
 // Then: ./matrix
@@ -28,22 +26,22 @@ int main(){
     int valid = 0;
 
     // Normal driver code
-    // do{
-    //     valid = initializeMatrices();
-    // } while(valid != 0);
-    // do{
-    //     valid = menu();
-    // } while(valid != 5);
+    do{
+        valid = initializeMatrices();
+    } while(valid != 0);
+    do{
+        valid = menu();
+    } while(valid != 5);
+
 
     // For measuring time taken by multiplication() function for matrices of different sizes
-    randomMatrices(1024);
-    std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
-    multiplication();
-    std::chrono::high_resolution_clock::time_point finish = std::chrono::high_resolution_clock::now();
-    double duration = std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count();
-    duration /= 1000; // Convert from microseconds to ms
-    std::cout << "Duration: " << duration << " ms" << std::endl;
-
+    // randomMatrices(1024);
+    // std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
+    // multiplication();
+    // std::chrono::high_resolution_clock::time_point finish = std::chrono::high_resolution_clock::now();
+    // double duration = std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count();
+    // duration /= 1000; // Convert from microseconds to ms
+    // std::cout << "Duration: " << duration << " ms" << std::endl;
 
 
     // Deallocate matrixA and matrixB
@@ -198,8 +196,8 @@ int multiplication(){
         return 1;
     }
     Matrix product = (*matrixA) * (*matrixB);
-    //printf("Product matrix: \n");
-    //product.print();
+    printf("Product matrix: \n");
+    product.print();
     
     // Deallocate resulting matrix
     product.~Matrix();
