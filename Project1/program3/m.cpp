@@ -133,6 +133,14 @@ int initializeMatrices(){
 
     matrixB = new Matrix(fp);
     
+    
+    // Print matrices
+    printf("Matrix A: \n");
+    matrixA->print();
+    printf("Matrix B: \n");
+    matrixB->print();
+
+
     fclose(fp);
     return 0;
 }
@@ -214,7 +222,9 @@ int randomMatrices(int size){
     matrixB = new Matrix(size);
     
     // Print matrices
+    printf("Matrix A: \n");
     matrixA->print();
+    printf("Matrix B: \n");
     matrixB->print();
     return 0;
 }
