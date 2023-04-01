@@ -33,7 +33,17 @@ class Matrix{
             
         }
         Matrix(int size){ // For initializing with random values
-            Matrix(size, size, false);
+            //Matrix(size, size, false); // causes segment fault
+            rows = size;
+            cols = size;
+            exist = true;
+            
+            // Allocate memory
+            matrix1 = new float*[rows];
+            for(int i=0; i<rows; i++){
+                matrix1[i] = new float[cols];
+            }
+
             std::random_device rando;
             std::mt19937 gen(rando());
             std::uniform_real_distribution<float> dist(1.0f, 10.0f);

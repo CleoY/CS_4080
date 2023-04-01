@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <random>
 #include <chrono>
+#include <iostream>
 #include "matrix.h"
 
 // Function signatures
@@ -17,18 +19,29 @@ int randomMatrices(int size);
 Matrix* matrixA;
 Matrix* matrixB;
 
+// Uncomment driver code and resulting matrix operations
+// Recomment timing code
 
-// To run: g++ m.cpp -o mat -lstdc++
+// To run: g++ matrix.cpp -o matrix -lstdc++
 int main(){
     int valid = 0;
 
     // Normal driver code
-    do{
-        valid = initializeMatrices();
-    } while(valid != 0);
-    do{
-        valid = menu();
-    } while(valid != 5);
+    // do{
+    //     valid = initializeMatrices();
+    // } while(valid != 0);
+    // do{
+    //     valid = menu();
+    // } while(valid != 5);
+
+    // For measuring time taken by multiplication() function for matrices of different sizes
+    randomMatrices(2);
+    std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
+    multiplication();
+    std::chrono::high_resolution_clock::time_point finish = std::chrono::high_resolution_clock::now();
+    double duration = std::chrono::duration_cast<std::chrono::microseconds>(finish - start).count();
+    duration /= 1000; // Convert from microseconds to ms
+    std::cout << "Duration: " << duration << " ms" << std::endl;
 
 
 
