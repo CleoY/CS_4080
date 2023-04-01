@@ -2,9 +2,8 @@
 #include <random>
 #include <chrono>
 
-Matrix matrixA = NULL;
-Matrix matrixB = NULL;
-
+Matrix matrixA;
+Matrix matrixB;
 
 int menu();
 int printMenuOptions();
@@ -13,8 +12,9 @@ bool sizeValidation(int option);
 int randomMatrices(int size);
 //int printMatrix(float** given, int rows, int cols);
 
-int main(){
 
+int main(){
+    
 
     return 0;
 }
@@ -49,7 +49,6 @@ int menu(){
 }
 
 
-
 int printMenuOptions(){
     printf("\n");
     printf("1: Upload 2 new matrices.\n");
@@ -69,28 +68,29 @@ int initializeMatrices(){
     char check; // For various file checks
     float temp; 
 
+
+
+
+
+
+
+/// matrix obj will not be null
     // Deallocate matrixA
     // In case user already initialized matrices and wants to use different matrices
-    if(matrixA != NULL){
-        for(int i=0; i<matrixARows; i++){
-            delete[] matrixA[i];
-        }
-        delete[] matrixA;
+    if(matrixA.existenceCheck()){ // If matrixA already exists, delete it
+        matrixA.deleteMatrix();
         matrixA = NULL;
     }
 
     // Deallocate matrixB
     if(matrixB != NULL){
-        for(int i=0; i<matrixBRows; i++){
-            delete[] matrixB[i];
-        }
-        delete[] matrixB;
+        matrixB.deleteMatrix();
         matrixB = NULL;
     }
 
     // Get the file from which to read the matrices
     do{
-        printf("Please enter the name of the file you would like to upload: ");
+        printf("Please enter the name of the file you would like to upload for matrix A: ");
         fgets(fileName, sizeof(fileName), stdin);
         fileName[strcspn(fileName, "\n")] = '\0'; // remove the newline char
         fp = fopen(fileName, "r");
@@ -99,60 +99,8 @@ int initializeMatrices(){
         }
     } while(fp == NULL);
 
-    // Read size of matrixA from first line of file
-    fscanf(fp, "%d %d", &matrixARows, &matrixACols);
-    fscanf(fp, "%*c"); // Clear file reader buffer
-
-    // Allocate space for matrixA
-    matrixA = new float*[matrixARows];
-    for(int i=0; i<matrixARows; i++){
-        matrixA[i] = new float[matrixACols];
-    }
-
-    int rowCounter = 0;
-    int colCounter = 0;
-
-    while(rowCounter < matrixARows){
-        while(colCounter < matrixACols){
-            fscanf(fp, "%f", &temp);
-            matrixA[rowCounter][colCounter] = temp;
-            colCounter++;
-            check = fgetc(fp);
-            if(check == '\n'){
-                break;
-            }
-        }
-        colCounter = 0;
-        rowCounter++;
-    }
-
-
-    // Now upload matrix B
-    fscanf(fp, "%d %d", &matrixBRows, &matrixBCols);
-    fscanf(fp, "%*c"); // Clear file reader buffer
-
-    // Allocate space for matrixB
-    matrixB = new float*[matrixBRows];
-    for(int i=0; i<matrixBRows; i++){
-        matrixB[i] = new float[matrixBCols];
-    }
-
-    rowCounter = 0;
-    colCounter = 0;
-    while(rowCounter < matrixBRows){
-        while(colCounter < matrixBCols){ 
-            fscanf(fp, "%f", &temp);
-            matrixB[rowCounter][colCounter] = temp;
-            colCounter++;
-            check = fgetc(fp);
-            if(check == '\n'){
-                break;
-            }
-        }
-        colCounter = 0;
-        rowCounter++;
-    }
-
+    
+    
     fclose(fp);
     return 0;
 }
