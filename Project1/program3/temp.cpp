@@ -20,22 +20,45 @@ class Matrix{
                 matrix1[i] = new float[cols];
             }
         }
-        Matrix(int nRows, int nCols, FILE *fp){
-            Matrix(nRows, nCols); // I hope this works
+        Matrix(FILE *fp){
+            // Read dimensions from first line of file
+            fscanf(fp, "%d %d", &rows, &cols);
+            fscanf(fp, "%*c"); // Clear file reader buffer
 
+            // Allocate space for matrix
+            matrix1 = new float*[rows];
+            for(int i=0; i<rows; i++){
+                matrix1[i] = new float[cols];
+            }
+
+            int rowCounter = 0;
+            int colCounter = 0;
+            char check; // For various file checks
+            float temp; 
+
+            while(rowCounter < rows){
+                while(colCounter < cols){
+                    fscanf(fp, "%f", &temp);
+                    matrix1[rowCounter][colCounter] = temp;
+                    colCounter++;
+                    check = fgetc(fp);
+                    if(check == '\n'){
+                        break;
+                    }
+                }
+                colCounter = 0;
+                rowCounter++;
+            }
         }
-
-        // int setMatrix(int nRows, int nCols, FILE *fp){
-        //     rows = nRows;
-        //     cols = nCols;
-        //     exist = true;
-            
-        //     matrix1 = new float*[rows];
-        //     for(int i=0; i<rows; i++){
-        //         matrix1[i] = new float[cols];
-        //     }
-        // }
-
+        ~Matrix(){
+            for(int i=0; i<rows; i++){
+                delete[] matrix1[i];
+            }
+            delete[] matrix1;
+            rows = 0;
+            cols = 0;
+            exist = false;
+        }
 
 
         Matrix operator+(const Matrix& matrix2){
@@ -66,22 +89,6 @@ class Matrix{
             return exist;
         }
 
-        int deleteMatrix(){
-            if(matrix1 == NULL){
-                printf("The matrix cannot be deleted because it does not exist.\n");
-                return 1; // Deletion failure
-            }
-            for(int i=0; i<rows; i++){
-                    delete[] matrix1[i];
-            }
-            delete[] matrix1;
-            matrix1 = NULL;
-            rows = 0;
-            cols = 0;
-            exist = false;
-
-            return 0;
-        }
 
         int print(){
             if(matrix1 == NULL){

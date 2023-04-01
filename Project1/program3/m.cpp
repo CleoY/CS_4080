@@ -2,8 +2,8 @@
 #include <random>
 #include <chrono>
 
-Matrix matrixA;
-Matrix matrixB;
+Matrix* matrixA;
+Matrix* matrixB;
 
 int menu();
 int printMenuOptions();
@@ -16,6 +16,19 @@ int randomMatrices(int size);
 int main(){
     
 
+
+
+    // Deallocate matrixA and matrixB
+    if(matrixA != NULL){
+        delete matrixA;
+        matrixA = NULL;
+    }
+
+    // Deallocate matrixB
+    if(matrixB != NULL){
+        delete matrixB;
+        matrixB = NULL;
+    }
     return 0;
 }
 
@@ -36,7 +49,8 @@ int menu(){
     if(choice == 1){
         initializeMatrices();
     } else if(choice == 2){
-        //
+        //Matrix* result = *matrixA + *matrixB;
+        // then print or make it print within the operation
     } else if(choice == 3){
         //
     } else if(choice == 4){
@@ -65,26 +79,16 @@ int initializeMatrices(){
     char fileName[100];
     FILE *fp;
 
-    char check; // For various file checks
-    float temp; 
-
-
-
-
-
-
-
-/// matrix obj will not be null
     // Deallocate matrixA
     // In case user already initialized matrices and wants to use different matrices
-    if(matrixA.existenceCheck()){ // If matrixA already exists, delete it
-        matrixA.deleteMatrix();
+    if(matrixA != NULL){ // If matrixA already exists, delete it
+        delete matrixA;
         matrixA = NULL;
     }
 
     // Deallocate matrixB
     if(matrixB != NULL){
-        matrixB.deleteMatrix();
+        delete matrixB;
         matrixB = NULL;
     }
 
@@ -99,7 +103,20 @@ int initializeMatrices(){
         }
     } while(fp == NULL);
 
+    matrixA = new Matrix(fp);
     
+
+    do{
+        printf("Please enter the name of the file you would like to upload for matrix B: ");
+        fgets(fileName, sizeof(fileName), stdin);
+        fileName[strcspn(fileName, "\n")] = '\0'; // remove the newline char
+        fp = fopen(fileName, "r");
+        if(fp == NULL){
+            printf("Error: File not found. Please try again.\n");
+        }
+    } while(fp == NULL);
+
+    matrixB = new Matrix(fp);
     
     fclose(fp);
     return 0;
