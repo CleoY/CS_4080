@@ -28,9 +28,9 @@ class Matrix{
         ~Matrix();
         int getRows();
         int getCols();
-        Matrix operator+(const Matrix& addend)const;
-        Matrix operator-(const Matrix& subtrahend)const;
-        Matrix operator*(const Matrix& multiplicand)const;
+        Matrix operator+(const Matrix& addend);
+        Matrix operator-(const Matrix& subtrahend);
+        Matrix operator*(const Matrix& multiplicand);
         int print();
 };
 
@@ -169,8 +169,8 @@ int addition(){
     sum.print();
 
     // Deallocate resulting matrix
-    delete sum;
-    sum = NULL;
+    sum.~Matrix();
+    //sum = NULL; //////// Memory leak?
 
     return 0;
 }
@@ -180,13 +180,13 @@ int subtraction(){
     if(!sizeValidation(1)){
         return 1;
     }
-    Matrix* difference = (*matrixA) - (*matrixB); // Overloaded + operation
+    Matrix difference = (*matrixA) - (*matrixB); // Overloaded + operation
     printf("Difference matrix: \n");
-    difference->print();
+    difference.print();
     
     // Deallocate resulting matrix
-    delete difference;
-    difference = NULL;
+    difference.~Matrix();
+    //difference = NULL; //////// Memory leak?
 
     return 0;
 }
@@ -196,13 +196,13 @@ int multiplication(){
     if(!sizeValidation(2)){
         return 1;
     }
-    Matrix* product = (*matrixA) * (*matrixB);
+    Matrix product = (*matrixA) * (*matrixB);
     printf("Product matrix: \n");
-    product->print();
+    product.print();
     
     // Deallocate resulting matrix
-    delete product;
-    product = NULL;
+    product.~Matrix();
+    //product = NULL; //////// Memory leak?
 
     return 0;
 }
@@ -237,6 +237,7 @@ int randomMatrices(int size){
     // Print matrices
     matrixA->print();
     matrixB->print();
+    return 0;
 }
 
 
@@ -339,7 +340,7 @@ class Matrix{
             return this->cols;
         }
 
-        Matrix operator+(const Matrix& addend) const{
+        Matrix operator+(const Matrix& addend){
             Matrix result(this->rows, this->cols, false); // may need to initialize with 0's (true) 
 
             for(int i=0; i<rows; i++){
@@ -351,7 +352,7 @@ class Matrix{
             return result;
         }
 
-        Matrix operator-(const Matrix& subtrahend) const{
+        Matrix operator-(const Matrix& subtrahend){
             Matrix result(this->rows, this->cols, false); // may need to initialize with 0's (true) 
 
             for(int i=0; i<rows; i++){
@@ -363,7 +364,7 @@ class Matrix{
             return result;
         }
 
-        Matrix operator*(const Matrix& multiplicand) const{
+        Matrix operator*(const Matrix& multiplicand){
             int nRows = this->rows; // matrixA rows
             int nCols = multiplicand.cols; // matrixB cols
             Matrix result(nRows, nCols, true);

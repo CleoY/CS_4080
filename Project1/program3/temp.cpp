@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <random>
-
 class Matrix{
     public:
         Matrix(){
@@ -133,15 +130,6 @@ class Matrix{
             return result;
         }
 
-        // bool existenceCheck(){
-        //     return exist;
-        // }
-
-
-        // Matrix randomMatrix(int size){
-        //     Matrix result(size);
-        //     return result;
-        // }
 
         int print(){
             if(matrix1 == NULL){
@@ -161,6 +149,6 @@ class Matrix{
         float** matrix1;
         int rows;
         int cols;
-        bool exist;// = false; // initial value should not cause issues?
+        bool exist; // = false; // initial value should not cause issues?
 
 };
