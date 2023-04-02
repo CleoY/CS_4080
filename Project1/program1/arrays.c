@@ -17,6 +17,9 @@ int matrixACols;
 int matrixBRows;
 int matrixBCols;
 
+
+// To run: gcc arrays.c -o arrays
+// Then: ./arrays
 int main(){
     int valid = 0;
 
@@ -59,7 +62,6 @@ int menu(){
         printf("Exiting program.");
         return 5;
     }
-    //while ((getchar()) != '\n'); // Clear buffer
     return 0;
 }
 

@@ -18,7 +18,6 @@ public class Main {
         
         // Code just for measuring time taken to complete multiplication function for nxn matrices
         // start.randomMatrices(1024);
-
         // double beginning = System.nanoTime();
         // start.multiplication();
         // double end = System.nanoTime();

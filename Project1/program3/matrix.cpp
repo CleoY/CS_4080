@@ -147,11 +147,10 @@ int initializeMatrices(){
     
     
     // Print matrices
-    printf("Matrix A: \n");
-    matrixA->print();
-    printf("Matrix B: \n");
-    matrixB->print();
-
+    // printf("Matrix A: \n");
+    // matrixA->print();
+    // printf("Matrix B: \n");
+    // matrixB->print();
 
     fclose(fp);
     return 0;

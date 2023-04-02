@@ -33,7 +33,6 @@ class Matrix{
             
         }
         Matrix(int size){ // For initializing with random values
-            //Matrix(size, size, false); // causes segment fault
             rows = size;
             cols = size;
             exist = true;
